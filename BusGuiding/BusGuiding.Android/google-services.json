@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "837661166060",
+    "project_id": "research-busguiding",
+    "storage_bucket": "research-busguiding.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837661166060:android:64d4a3fe302804215258c9",
+        "android_client_info": {
+          "package_name": "com.bertoferrero.busguiding"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837661166060-s6fheh004e2h66o39ktsa19p809vnma4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDX3dLYxntK6iXJ2bogk6Z300latBSkVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837661166060-s6fheh004e2h66o39ktsa19p809vnma4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
