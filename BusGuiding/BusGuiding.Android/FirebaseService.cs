@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Util;
 using Firebase.Messaging;
+using Xamarin.Forms;
 
 namespace BusGuiding.Droid
 {
@@ -12,14 +13,13 @@ namespace BusGuiding.Droid
         public override void OnNewToken(string p0)
         {
             base.OnNewToken(p0);
-            Log.Debug("push", "Refreshed token: " + p0);
-            // can send token to backend server or store in secure storage
+            MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "push.newtoken", p0);
         }
 
         public override void OnMessageReceived(RemoteMessage p0)
         {
             base.OnMessageReceived(p0);
-            Log.Debug("push", "Message received: " + p0.GetNotification().Body);
+            MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "push.newnotification", p0.Data);
         }
     }
 }
