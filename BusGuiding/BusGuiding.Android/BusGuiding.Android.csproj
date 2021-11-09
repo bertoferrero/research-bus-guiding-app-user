@@ -33,6 +33,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,8 +58,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Firebase.Iid">
-      <Version>121.1.0.1</Version>
+    <PackageReference Include="Xamarin.Firebase.Analytics">
+      <Version>119.0.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Messaging">
       <Version>122.0.0.1</Version>
@@ -70,8 +74,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FirebaseService.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="FirebaseIIDService.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
