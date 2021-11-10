@@ -7,6 +7,12 @@ namespace BusGuiding.DependencyServices
 {
     public interface INotificationService
     {
+        event EventHandler<string> tokenUpdated;
+        event EventHandler<IDictionary<string, string>> pushReceived;
+
+        void start();
+
         Task<string> GetDeviceTokenAsync();
+
     }
 }

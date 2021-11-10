@@ -10,11 +10,26 @@ namespace BusGuiding
 {
     class NotificationHandler
     {
-        public static void OnNewToken(string NewToken)
+        private static INotificationService currentService = null;
+        public static void initEvents()
         {
+            if (currentService == null)
+            {
+                currentService = DependencyService.Get<INotificationService>();
+                currentService.start();
+                currentService.tokenUpdated += OnNewToken;
+                currentService.pushReceived += OnNewNotification;
+            }
         }
 
-        public static void OnNewNotification(Dictionary<string, string> data) { }
+        private static void OnNewToken(object sender, string NewToken)
+        {
+            int a = 3;
+        }
+
+        private static void OnNewNotification(object sender, IDictionary<string, string> data) {
+            int b = 4;
+        }
 
         public static async Task<string> GetTokenAsync()
         {

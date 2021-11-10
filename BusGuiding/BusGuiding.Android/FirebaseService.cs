@@ -13,13 +13,13 @@ namespace BusGuiding.Droid
         public override void OnNewToken(string p0)
         {
             base.OnNewToken(p0);
-            MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "push.newtoken", p0);
+            BusGuiding.Droid.DependencyService.NotificationServices.mySelf.receivedNewToken(p0);
         }
 
         public override void OnMessageReceived(RemoteMessage p0)
         {
             base.OnMessageReceived(p0);
-            MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "push.newnotification", p0.Data);
+            BusGuiding.Droid.DependencyService.NotificationServices.mySelf.receivedNewNotification(p0.Data);
         }
     }
 }
