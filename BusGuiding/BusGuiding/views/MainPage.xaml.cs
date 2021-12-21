@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace BusGuiding
+namespace BusGuiding.Views
 {
     public partial class MainPage : ContentPage
     {

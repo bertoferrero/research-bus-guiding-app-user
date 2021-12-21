@@ -11,7 +11,7 @@ namespace BusGuiding
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new AppShell();
 
             ////Inicializamos elementos
             //Notificaciones - Basado en https://stackoverflow.com/questions/30213726/pass-data-from-android-service-to-contentpage-in-xamarin-form-based-application
