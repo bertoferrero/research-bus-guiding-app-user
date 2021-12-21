@@ -5,6 +5,6 @@
        x:Class="BusGuiding.AppShell">
     <Tab>
         <ShellContent 
-                          ContentTemplate="{DataTemplate views:MainPage}" />
+                          ContentTemplate="{DataTemplate views:LoginPage}" />
     </Tab>
 </Shell>
