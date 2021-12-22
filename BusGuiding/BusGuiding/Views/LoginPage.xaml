@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BusGuiding.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout
+        <StackLayout Margin="10"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand">
-            <Label Text="User" />
-            <Entry Placeholder="" />
-            <Label Text="Password" />
-            <Entry Placeholder="" IsPassword="True"/>
+                HorizontalOptions="FillAndExpand">
+            <!--<Label Text="User"/>-->
+            <Entry Placeholder="User" />
+            <!--<Label Text="Password" />-->
+            <Entry Placeholder="Password" IsPassword="True"/>
             
 <Button Text="Submit" />
         </StackLayout>
