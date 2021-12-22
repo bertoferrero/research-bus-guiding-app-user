@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding Title}"
              x:Class="BusGuiding.Views.LoginPage">
     <ContentPage.Content>
         <StackLayout Margin="10"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="FillAndExpand">
             <!--<Label Text="User"/>-->
-            <Entry Placeholder="User" />
+            <Entry Placeholder="User" Text="{Binding Username}"/>
             <!--<Label Text="Password" />-->
-            <Entry Placeholder="Password" IsPassword="True"/>
-            
-<Button Text="Submit" />
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+            <Button Text="Login" Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

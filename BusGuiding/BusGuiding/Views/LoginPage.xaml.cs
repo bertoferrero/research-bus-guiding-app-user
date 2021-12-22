@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusGuiding.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace BusGuiding.Views
         public LoginPage()
         {
             InitializeComponent();
+            this.BindingContext = new LoginViewModel();
         }
     }
 }
