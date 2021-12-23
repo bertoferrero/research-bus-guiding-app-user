@@ -10,7 +10,7 @@ namespace BusGuiding.Models.Api
 {
     public class User
     {
-        public static async Task LoginAsync(string user, string password)
+        public static async Task<Dictionary<string, string>> LoginAsync(string user, string password)
         {
             //https://www.luisllamas.es/consumir-un-api-rest-en-c-facilmente-con-restsharp/
             var client = new RestClient(Constants.Api.ApiEndpoint);
@@ -20,8 +20,8 @@ namespace BusGuiding.Models.Api
             request.AddJsonBody(authData);
             var response = await client.ExecuteAsync(request);
             CheckResponse(response);
-            var responseContent = client.Deserialize<Dictionary<string, string>>(response);
-            Console.WriteLine(response.Content);
+            Dictionary<string, string> responseContent = client.Deserialize<Dictionary<string, string>>(response).Data;
+            return responseContent;
         }
 
         

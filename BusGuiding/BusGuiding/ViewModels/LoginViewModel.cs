@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace BusGuiding.ViewModels
@@ -26,18 +27,33 @@ namespace BusGuiding.ViewModels
 
         public LoginViewModel()
         {
+            string userApiToken = Preferences.Get(Constants.PreferenceKeys.UserApiToken, "");
+            if (!string.IsNullOrEmpty(userApiToken))
+            {
+                //TODO Si hay token, comprobamos si es valido, de ser asi enviamos a la pagina principal. Si no, lo borramos
+            }
             LoginCommand = new Command(OnLoginClicked);
+
+
+            //DEBUG
+            Preferences.Set(Constants.PreferenceKeys.UserRole, "dev");
+            (App.Current.MainPage.BindingContext as ShellViewModel).SetLoggedUserContextAsync();
         }
 
         private async void OnLoginClicked(object obj)
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            //await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             //IsBusy = true;
             try
             {
-                await Models.Api.User.LoginAsync(username, password);
-            }catch(ConnectionException ex)
+                var loginResponse = await Models.Api.User.LoginAsync(username, password);
+                //Store the token
+                Preferences.Set(Constants.PreferenceKeys.UserApiToken, loginResponse["token"]);
+                //Store the role
+                Preferences.Set(Constants.PreferenceKeys.UserRole, loginResponse["role"]);
+                //TODO Load the page
+                //await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            }
+            catch(ConnectionException ex)
             {
                 //TODO Connection error
             }catch(StatusCodeException ex)

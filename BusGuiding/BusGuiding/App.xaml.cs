@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BusGuiding.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,6 +9,7 @@ namespace BusGuiding
 {
     public partial class App : Application
     {
+
         public App()
         {
             InitializeComponent();
@@ -30,5 +33,6 @@ namespace BusGuiding
         protected override void OnResume()
         {
         }
+
     }
 }
