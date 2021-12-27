@@ -8,41 +8,18 @@ using System.Threading.Tasks;
 
 namespace BusGuiding.Models.Api
 {
-    public class User
+    public class User : BasicRest
     {
         public static async Task<Dictionary<string, string>> LoginAsync(string user, string password)
         {
             //https://www.luisllamas.es/consumir-un-api-rest-en-c-facilmente-con-restsharp/
-            var client = new RestClient(Constants.Api.ApiEndpoint);
-            var request = new RestRequest(Constants.Api.LoginPath, Method.POST);
-            var authData = new Dictionary<string, string> { { "username", user }, { "password", password } };
-            //var authData = new BasicAuth { username = user, password = password };
-            request.AddJsonBody(authData);
-            var response = await client.ExecuteAsync(request);
-            CheckResponse(response);
-            Dictionary<string, string> responseContent = client.Deserialize<Dictionary<string, string>>(response).Data;
-            return responseContent;
+            Dictionary<string, string> authData = new Dictionary<string, string> { { "username", user }, { "password", password } };
+            return await ExecuteRequest<Dictionary<string, string>>(Constants.Api.LoginPath, Method.POST, null, authData);
         }
 
-        
-        protected static void CheckResponse(IRestResponse response)
+        public static async Task<Dictionary<string, string>> GetUserAsync(string apiToken)
         {
-            //Check errors
-            if(!response.ResponseStatus.Equals(ResponseStatus.Completed))
-            {
-                throw new ConnectionException(response.ErrorMessage, response.ErrorException, response.ResponseStatus);
-            }
-            //Check code
-            if (!response.StatusCode.Equals(HttpStatusCode.OK))
-            {
-                throw new StatusCodeException(response.StatusDescription, response.ErrorException, response.StatusCode);
-            }
+            return await ExecuteRequest<Dictionary<string, string>>(Constants.Api.UserPath, Method.GET, apiToken);
         }
-    }
-
-    class BasicAuth
-    {
-        public string username;
-        public string password;
     }
 }

@@ -1,17 +1,52 @@
 ﻿
 using BusGuiding.Views;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace BusGuiding
 {
     public partial class AppShell : Shell
     {
+
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         }
 
-        //Seguir las ideas de https://stackoverflow.com/questions/59569567/xamarin-forms-dynamically-add-shell-items y https://stackoverflow.com/questions/65911023/dynamically-create-list-of-flyoutitem-in-shell/66036972#66036972
+        public async void SetLoggedUserContextAsync()
+        {
+            var role = Preferences.Get(Constants.PreferenceKeys.UserRole, "");
+            if (role.Equals(Constants.UserRoles.Dev))
+            {
+                await SetDevContextAsync();
+            }
+            else if (role.Equals(Constants.UserRoles.Rider))
+            {
+
+            }
+            else if (role.Equals(Constants.UserRoles.Driver))
+            {
+
+            }
+            else
+            {
+                Preferences.Clear();
+                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            }
+        }
+
+        public async Task SetDevContextAsync()
+        {
+            //FlyoutItems = DevFlyoutItems;
+            DevMenu.FlyoutItemIsVisible = true;
+            //browse to dev main page
+            await Shell.Current.GoToAsync("//devmainpage");
+        }
+
     }
 }

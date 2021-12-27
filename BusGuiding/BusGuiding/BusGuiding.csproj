@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.15.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.14" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>

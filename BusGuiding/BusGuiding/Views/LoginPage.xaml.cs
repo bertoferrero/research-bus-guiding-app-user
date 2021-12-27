@@ -18,5 +18,11 @@ namespace BusGuiding.Views
             InitializeComponent();
             this.BindingContext = new LoginViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            (this.BindingContext as LoginViewModel).CheckLoggedUser();
+        }
     }
 }

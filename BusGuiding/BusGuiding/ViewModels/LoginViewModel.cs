@@ -1,4 +1,5 @@
 ﻿using BusGuiding.Models.Api.Exceptions;
+using BusGuiding.Views.Tools;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,10 @@ namespace BusGuiding.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private readonly Services.IMessageService _messageService;
+
         public Command LoginCommand { get; }
+        private bool showForm = false;
         private string username;
         private string password;
 
@@ -25,40 +29,77 @@ namespace BusGuiding.ViewModels
             set => SetProperty(ref password, value);
         }
 
+        public bool ShowForm
+        {
+            get => showForm;
+            set => SetProperty(ref showForm, value);
+        }
+
         public LoginViewModel()
+        {
+            this._messageService = DependencyService.Get<Services.IMessageService>();
+            LoginCommand = new Command(OnLoginClicked);
+
+        }
+
+        public async void CheckLoggedUser()
         {
             string userApiToken = Preferences.Get(Constants.PreferenceKeys.UserApiToken, "");
             if (!string.IsNullOrEmpty(userApiToken))
             {
-                //TODO Si hay token, comprobamos si es valido, de ser asi enviamos a la pagina principal. Si no, lo borramos
+                await LoadingPopupPage.ShowLoading();
+                //Si hay token, comprobamos si es valido, de ser asi enviamos a la pagina principal. Si no, lo borramos
+                try
+                {
+                    await Models.Api.User.GetUserAsync(userApiToken);
+                    //Cargamos la pagina principal
+                    await LoadingPopupPage.HideLoadingAsync();
+                    (App.Current.MainPage as AppShell).SetLoggedUserContextAsync();
+                }
+                catch (Exception ex)
+                {
+                    await LoadingPopupPage.HideLoadingAsync();
+                    Preferences.Remove(Constants.PreferenceKeys.UserApiToken);
+                }
             }
-            LoginCommand = new Command(OnLoginClicked);
-
-
-            //DEBUG
-            Preferences.Set(Constants.PreferenceKeys.UserRole, "dev");
-            (App.Current.MainPage.BindingContext as ShellViewModel).SetLoggedUserContextAsync();
+            else
+            {
+                ShowForm = true;
+            }
         }
 
         private async void OnLoginClicked(object obj)
         {
-            //IsBusy = true;
+
+            string cleanUsername = username.Trim();
+            string cleanPassword = password.Trim();
+            if (string.IsNullOrEmpty(cleanUsername) || string.IsNullOrEmpty(cleanPassword))
+            {
+                return;
+            }
             try
             {
+                await LoadingPopupPage.ShowLoading();
                 var loginResponse = await Models.Api.User.LoginAsync(username, password);
                 //Store the token
                 Preferences.Set(Constants.PreferenceKeys.UserApiToken, loginResponse["token"]);
                 //Store the role
                 Preferences.Set(Constants.PreferenceKeys.UserRole, loginResponse["role"]);
-                //TODO Load the page
-                //await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+                //Load the page
+                await LoadingPopupPage.HideLoadingAsync();
+                (App.Current.MainPage as AppShell).SetLoggedUserContextAsync();
             }
             catch(ConnectionException ex)
             {
                 //TODO Connection error
-            }catch(StatusCodeException ex)
+                await LoadingPopupPage.HideLoadingAsync();
+                await this._messageService.DisplayAlert("Error", "Connexion error.", "Close");
+            }
+            catch(StatusCodeException ex)
             {
                 //Login error
+                await LoadingPopupPage.HideLoadingAsync();
+                await this._messageService.DisplayAlert("Login error", "Something is wrong in your data.", "Close");
             }
             //IsBusy = false;
         }

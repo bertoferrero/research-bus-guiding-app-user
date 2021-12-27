@@ -12,6 +12,8 @@ namespace BusGuiding
 
         public App()
         {
+            DependencyService.Register<ViewModels.Services.IMessageService, Views.Services.MessageService>();
+
             InitializeComponent();
 
             MainPage = new AppShell();

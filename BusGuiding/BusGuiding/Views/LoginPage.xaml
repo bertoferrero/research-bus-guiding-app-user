@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout Margin="10"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="FillAndExpand">
+                HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowForm}">
             <!--<Label Text="User"/>-->
             <Entry Placeholder="User" Text="{Binding Username}"/>
             <!--<Label Text="Password" />-->

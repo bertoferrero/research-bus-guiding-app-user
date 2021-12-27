@@ -2,31 +2,14 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:BusGuiding.Views"
-       xmlns:viewmodels="clr-namespace:BusGuiding.ViewModels"
+       xmlns:viewsdev="clr-namespace:BusGuiding.Views.Dev"
        x:Name="shell"
        x:Class="BusGuiding.AppShell">
-    <Shell.BindingContext>
-        <viewmodels:ShellViewModel/>
-    </Shell.BindingContext>
-
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="MainShell" ContentTemplate="{DataTemplate views:MainPage}" />
-    </FlyoutItem>
     <Tab>
         <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
     </Tab>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent x:Name="DevMenu" Title="MainShell" ContentTemplate="{DataTemplate viewsdev:MainPage}" FlyoutItemIsVisible="False" Route="devmainpage"/>
+    </FlyoutItem>
 
-    <Shell.FlyoutContent>
-        <CollectionView
-                            IsGrouped="True"
-                            ItemsSource="{Binding FlyoutItems}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Title}"
-                               TextColor="Red"
-                               FontSize="Large" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </Shell.FlyoutContent>
 </Shell>
