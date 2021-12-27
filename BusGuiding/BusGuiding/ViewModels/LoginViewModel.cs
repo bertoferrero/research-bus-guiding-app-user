@@ -51,7 +51,10 @@ namespace BusGuiding.ViewModels
                 //Si hay token, comprobamos si es valido, de ser asi enviamos a la pagina principal. Si no, lo borramos
                 try
                 {
-                    await Models.Api.User.GetUserAsync(userApiToken);
+                    //Try to update the device notification token on the same request
+                    string currentNotificationToken = await NotificationHandler.Instance.GetTokenAsync();
+                    //await Models.Api.User.GetUserAsync(userApiToken);
+                    await Models.Api.User.UpdateNotificationTokenAsync(userApiToken, currentNotificationToken);
                     //Cargamos la pagina principal
                     await LoadingPopupPage.HideLoadingAsync();
                     (App.Current.MainPage as AppShell).SetLoggedUserContextAsync();

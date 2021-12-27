@@ -21,5 +21,11 @@ namespace BusGuiding.Models.Api
         {
             return await ExecuteRequest<Dictionary<string, string>>(Constants.Api.UserPath, Method.GET, apiToken);
         }
+
+        public static async Task<Dictionary<string, string>> UpdateNotificationTokenAsync(string apiToken, string notificationToken)
+        {
+            Dictionary<string, string> data = new Dictionary<string, string> { { "notification_token", notificationToken } };
+            return await ExecuteRequest<Dictionary<string, string>>(Constants.Api.UserPath, Method.PUT, apiToken, data);
+        }
     }
 }
