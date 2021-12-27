@@ -9,7 +9,7 @@
         <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
     </Tab>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent x:Name="DevMenu" Title="MainShell" ContentTemplate="{DataTemplate viewsdev:MainPage}" FlyoutItemIsVisible="False" Route="devmainpage"/>
+        <ShellContent x:Name="DevDelaysMenu" Title="Delay tests" ContentTemplate="{DataTemplate viewsdev:DelayTestsPage}" FlyoutItemIsVisible="False" Route="devdelaytests"/>
     </FlyoutItem>
 
 </Shell>

@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace BusGuiding.Views.Dev
 {
-    public partial class MainPage : ContentPage
+    public partial class DelayTestsPage : ContentPage
     {
-        public MainPage()
+        public DelayTestsPage()
         {
             InitializeComponent();
         }

@@ -43,9 +43,9 @@ namespace BusGuiding
         public async Task SetDevContextAsync()
         {
             //FlyoutItems = DevFlyoutItems;
-            DevMenu.FlyoutItemIsVisible = true;
+            DevDelaysMenu.FlyoutItemIsVisible = true;
             //browse to dev main page
-            await Shell.Current.GoToAsync("//devmainpage");
+            await Shell.Current.GoToAsync("//devdelaytests");
         }
 
     }
