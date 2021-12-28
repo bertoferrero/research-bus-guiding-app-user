@@ -20,7 +20,7 @@ namespace BusGuiding
         {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     instance = new NotificationHandler();
                     instance.initEvents();
@@ -46,9 +46,23 @@ namespace BusGuiding
             }
         }
 
-        private void OnNewToken(object sender, string NewToken) => TokenUpdated(this, NewToken);
+        private void OnNewToken(object sender, string NewToken)
+        {
+            try
+            {
+                TokenUpdated(this, NewToken);
+            }
+            catch (Exception) { }
+        }
 
-        private void OnNewNotification(object sender, IDictionary<string, string> data) => NewNotification(this, data);
+        private void OnNewNotification(object sender, IDictionary<string, string> data)
+        {
+            try
+            {
+                NewNotification(this, data);
+            }
+            catch (Exception) { }
+        }
 
         public async Task<string> GetTokenAsync() => await currentService.GetDeviceTokenAsync();
     }

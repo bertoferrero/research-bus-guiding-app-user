@@ -16,6 +16,7 @@ namespace BusGuiding
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute("devdelaytests/fcm", typeof(Views.Dev.FCMTestPage));
         }
 
         public async void SetLoggedUserContextAsync()

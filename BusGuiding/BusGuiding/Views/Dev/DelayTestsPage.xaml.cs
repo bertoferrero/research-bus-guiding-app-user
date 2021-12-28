@@ -14,5 +14,20 @@ namespace BusGuiding.Views.Dev
         {
             InitializeComponent();
         }
+
+        private async void FCM_Button_ClickedAsync(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("fcm");
+        }
+
+        private void GTFS_Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BusGuiding.Views.Dev.DelayTestsPage">
+             x:Class="BusGuiding.Views.Dev.FCMTestPage">
 
     <StackLayout>
-        <Button Text="FCM Delay Test" Clicked="FCM_Button_ClickedAsync"/>
-        <Button Text="GTFS Delay test" Clicked="GTFS_Button_Clicked"/>
+        <Label Text="Stopped" x:Name="StatusLabel"/>
+        <Button Text="Start" x:Name="StartButton" Clicked="StartButton_Clicked" />
     </StackLayout>
 
 </ContentPage>

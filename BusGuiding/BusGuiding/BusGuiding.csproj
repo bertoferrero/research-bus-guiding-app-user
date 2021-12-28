@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Dev\FCMTestPage.xaml.cs">
+      <DependentUpon>FCMTestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Dev\DelayTestsPage.xaml.cs">
       <DependentUpon>DelayTestsPage.xaml</DependentUpon>
     </Compile>
