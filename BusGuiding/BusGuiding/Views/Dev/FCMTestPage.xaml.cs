@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusGuiding.Models.Api.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -50,10 +51,10 @@ namespace BusGuiding.Views.Dev
 
         private async Task StopFCMTestsAsync()
         {
-            //send remove topic registration to server
-            await Models.Api.NotificationTopics.ClearNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""));
             //unregister events from NotificationHandler
             NotificationHandler.Instance.NewNotification -= NotificationHandler_NewNotification;
+            //send remove topic registration to server
+            await Models.Api.NotificationTopics.ClearNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""));
             //set label and button texts
             StatusLabel.Text = "Stopped";
             StartButton.Text = "Start";
@@ -61,9 +62,23 @@ namespace BusGuiding.Views.Dev
             testRunning = false;
         }
 
-        private void NotificationHandler_NewNotification(object sender, IDictionary<string, string> e)
+        private async void NotificationHandler_NewNotification(object sender, IDictionary<string, string> e)
         {
-            int a = 3;
+            var logId = Convert.ToInt32(e["log_id"]);
+            try
+            {
+                await Models.Api.NotificationLog.UpdateNotificationLog(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), logId, DateTime.UtcNow);
+            }
+            catch (ConnectionException ex)
+            {
+                //TODO Connection error
+                int a = 3;
+            }
+            catch (StatusCodeException ex)
+            {
+                //Login error
+                int b = 4;
+            }
         }
     }
 }
