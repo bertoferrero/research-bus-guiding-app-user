@@ -17,6 +17,7 @@ namespace BusGuiding
         {
             InitializeComponent();
             Routing.RegisterRoute("devdelaytests/fcm", typeof(Views.Dev.FCMTestPage));
+            Routing.RegisterRoute("devdelaytests/gtfs", typeof(Views.Dev.GTFSTestPage));
         }
 
         public async void SetLoggedUserContextAsync()

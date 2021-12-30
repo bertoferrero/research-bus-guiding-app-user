@@ -20,14 +20,9 @@ namespace BusGuiding.Views.Dev
             await Shell.Current.GoToAsync("fcm");
         }
 
-        private void GTFS_Button_Clicked(object sender, EventArgs e)
+        private async void GTFS_Button_ClickedAsync(object sender, EventArgs e)
         {
-
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-
+            await Shell.Current.GoToAsync("gtfs");
         }
     }
 }

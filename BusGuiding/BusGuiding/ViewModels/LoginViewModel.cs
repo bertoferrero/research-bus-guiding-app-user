@@ -14,8 +14,8 @@ namespace BusGuiding.ViewModels
 
         public Command LoginCommand { get; }
         private bool showForm = false;
-        private string username;
-        private string password;
+        private string username = "";
+        private string password = "";
 
         public string Username
         {
