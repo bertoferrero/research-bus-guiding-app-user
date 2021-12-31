@@ -6,7 +6,7 @@ namespace BusGuiding.Constants
 {
     public static class Api
     {
-        public static string ApiEndpoint => "http://d209-185-196-57-199.ngrok.io/api";
+        public static string ApiEndpoint => "http://e095-185-196-57-199.ngrok.io/api";
         public static string LoginPath => "/login";
         public static string LogoutPath => "/logout";
         public static string UserPath => "/user";

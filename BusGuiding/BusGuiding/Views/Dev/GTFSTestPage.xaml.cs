@@ -25,12 +25,32 @@ namespace BusGuiding.Views.Dev
 
         private void StoppedButton_Clicked(object sender, EventArgs e)
         {
-
+            _ = SendSampleAsync("vehicle_stopped");
         }
 
         private void NextStopButton_Clicked(object sender, EventArgs e)
         {
+            _ = SendSampleAsync("vehicle_new_stop");
+        }
 
+        private async Task SendSampleAsync(string sampleType)
+        {
+            try
+            {
+                StatusLabel.Text = $"Sending {sampleType}";
+                await Models.Api.SampleLog.AddSampleLog(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), sampleType, DateTime.UtcNow);
+                StatusLabel.Text = $"Sent {sampleType}";
+            }
+            catch (ConnectionException ex)
+            {
+                //TODO Connection error
+                StatusLabel.Text = $"Connection error {sampleType}";
+            }
+            catch (StatusCodeException ex)
+            {
+                //Login error
+                StatusLabel.Text = $"Status code error {sampleType}";
+            }
         }
     }
 }
