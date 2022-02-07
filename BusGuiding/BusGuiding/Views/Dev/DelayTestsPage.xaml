@@ -6,6 +6,7 @@
     <StackLayout>
         <Button Text="FCM Delay Test" Clicked="FCM_Button_ClickedAsync"/>
         <Button Text="GTFS Delay test" Clicked="GTFS_Button_ClickedAsync"/>
+        <Button Text="Internal location Delay test" Clicked="InternalLocation_Button_ClickedAsync"/>
     </StackLayout>
 
 </ContentPage>

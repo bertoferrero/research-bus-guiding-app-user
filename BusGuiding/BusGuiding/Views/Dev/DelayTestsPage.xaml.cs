@@ -24,5 +24,10 @@ namespace BusGuiding.Views.Dev
         {
             await Shell.Current.GoToAsync("gtfs");
         }
+
+        private async void InternalLocation_Button_ClickedAsync(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("internallocation");
+        }
     }
 }
