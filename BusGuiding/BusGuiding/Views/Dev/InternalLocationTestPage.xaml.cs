@@ -5,14 +5,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using System.Threading;
 
 namespace BusGuiding.Views.Dev
 {
     public partial class InternalLocationTestPage : ContentPage
     {
         private bool testRunning = false;
+        private System.Timers.Timer gpsTimer = null;
+        CancellationTokenSource gpsCancellationToken = null;
 
         public InternalLocationTestPage()
         {
@@ -58,6 +63,9 @@ namespace BusGuiding.Views.Dev
             }
             StartButton.IsEnabled = true;
 
+            //Start the GPS subroutine
+            startGPSTimer();
+
             //set label and button texts
             RouteIdEntry.IsEnabled = VehicleIdEntry.IsEnabled = false;
             StoppedButton.IsVisible = NextStopButton.IsVisible = true;
@@ -68,6 +76,9 @@ namespace BusGuiding.Views.Dev
 
         private async Task StopTestAsync()
         {
+            //Stop GPS subroutine
+            stopGPSTimer();
+
             //Send emptu route and vehicle id
             await SendVehicleAndRouteAsync("", "");
             //set label and button texts
@@ -89,6 +100,41 @@ namespace BusGuiding.Views.Dev
         private void NextStopButton_Clicked(object sender, EventArgs e)
         {
             _ = SendSampleAsync("vehicle_new_stop");
+        }
+
+        private void startGPSTimer() {
+            GpsTimer_Elapsed(null, null);
+            return;
+            if (gpsTimer == null)
+            {
+                gpsTimer = new System.Timers.Timer(2000);
+                gpsTimer.Elapsed += GpsTimer_Elapsed;
+            }
+            gpsTimer.AutoReset = true;
+            gpsTimer.Start();
+        }
+
+        private void stopGPSTimer()
+        {
+            if(gpsTimer != null)
+            {
+                gpsTimer.Stop();
+                gpsTimer.Elapsed -= GpsTimer_Elapsed;
+                gpsTimer = null;
+            }
+            if (gpsCancellationToken != null)
+            {
+                gpsCancellationToken.Cancel();
+                gpsCancellationToken = null;
+            }
+        }
+
+        private async void GpsTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10000));
+            gpsCancellationToken = new CancellationTokenSource();
+            var location = await Geolocation.GetLocationAsync(request, gpsCancellationToken.Token);
+            gpsCancellationToken = null;
         }
 
         private async Task SendSampleAsync(string sampleType)
