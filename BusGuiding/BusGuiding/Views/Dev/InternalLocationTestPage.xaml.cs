@@ -52,7 +52,9 @@ namespace BusGuiding.Views.Dev
                 return;
             }
 
+            //Notes for GPS
             //https://stackoverflow.com/questions/45007614/alternative-to-thread-sleep-in-a-while-loop
+            //https://github.com/shernandezp/XamarinForms.LocationService
 
             StartButton.IsEnabled = false;
             //Send route and vehicle ID as update for this user
@@ -63,6 +65,8 @@ namespace BusGuiding.Views.Dev
             }
             StartButton.IsEnabled = true;
 
+            testRunning = true;
+
             //Start the GPS subroutine
             startGPSTimer();
 
@@ -71,7 +75,6 @@ namespace BusGuiding.Views.Dev
             StoppedButton.IsVisible = NextStopButton.IsVisible = true;
             SentStatusLabel.Text = "Running";
             StartButton.Text = "Stop";
-            testRunning = true;
         }
 
         private async Task StopTestAsync()
@@ -103,15 +106,20 @@ namespace BusGuiding.Views.Dev
         }
 
         private void startGPSTimer() {
-            GpsTimer_Elapsed(null, null);
-            return;
-            if (gpsTimer == null)
+            if (testRunning && gpsTimer == null)
             {
-                gpsTimer = new System.Timers.Timer(2000);
-                gpsTimer.Elapsed += GpsTimer_Elapsed;
+                gpsTimer = new System.Timers.Timer(1000);
+                gpsTimer.Elapsed += async (sender, args) => {
+                    await sendGeolocationData();
+                    if (testRunning && gpsTimer != null)
+                    {
+                        gpsTimer.Start();
+                    }
+                };
+                gpsTimer.Enabled = true;
+                gpsTimer.AutoReset = false;
+                gpsTimer.Start();
             }
-            gpsTimer.AutoReset = true;
-            gpsTimer.Start();
         }
 
         private void stopGPSTimer()
@@ -119,7 +127,6 @@ namespace BusGuiding.Views.Dev
             if(gpsTimer != null)
             {
                 gpsTimer.Stop();
-                gpsTimer.Elapsed -= GpsTimer_Elapsed;
                 gpsTimer = null;
             }
             if (gpsCancellationToken != null)
@@ -129,12 +136,23 @@ namespace BusGuiding.Views.Dev
             }
         }
 
-        private async void GpsTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private async Task sendGeolocationData()
         {
-            var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10000));
-            gpsCancellationToken = new CancellationTokenSource();
-            var location = await Geolocation.GetLocationAsync(request, gpsCancellationToken.Token);
-            gpsCancellationToken = null;
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10000));
+                gpsCancellationToken = new CancellationTokenSource();
+                var location = await Geolocation.GetLocationAsync(request, gpsCancellationToken.Token);
+                gpsCancellationToken = null;
+                var latitude = location.Latitude;
+                var longitude = location.Longitude;
+                _ = Models.Api.User.UpdateDriverLatitudeLongitude(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), latitude, longitude);
+                _ = SendSampleAsync("geolocation_update");
+                GPSStatusLabel.Text = $"Sent GPS {latitude} {longitude}";
+            }
+            catch(Exception ex){
+                GPSStatusLabel.Text = "Exception happend getting or sending geolocation: " + ex.Message;
+            }
         }
 
         private async Task SendSampleAsync(string sampleType)
