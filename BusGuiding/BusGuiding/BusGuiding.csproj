@@ -19,6 +19,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Dev\DriverDemoTestPage.xaml.cs">
+      <DependentUpon>DriverDemoTestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Dev\InternalLocationTestPage.xaml.cs">
+      <DependentUpon>InternalLocationTestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Dev\FunctionalDemoTestsPage.xaml.cs">
+      <DependentUpon>FunctionalDemoTestsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Dev\GTFSTestPage.xaml.cs">
+      <DependentUpon>GTFSTestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Dev\FCMTestPage.xaml.cs">
+      <DependentUpon>FCMTestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Dev\DelayTestsPage.xaml.cs">
       <DependentUpon>DelayTestsPage.xaml</DependentUpon>
     </Compile>

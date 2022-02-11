@@ -14,8 +14,8 @@ namespace BusGuiding.ViewModels
 
         public Command LoginCommand { get; }
         private bool showForm = false;
-        private string username;
-        private string password;
+        private string username = "";
+        private string password = "";
 
         public string Username
         {
@@ -58,6 +58,7 @@ namespace BusGuiding.ViewModels
                     //Cargamos la pagina principal
                     await LoadingPopupPage.HideLoadingAsync();
                     (App.Current.MainPage as AppShell).SetLoggedUserContextAsync();
+                    return;
                 }
                 catch (Exception ex)
                 {
@@ -65,10 +66,7 @@ namespace BusGuiding.ViewModels
                     Preferences.Remove(Constants.PreferenceKeys.UserApiToken);
                 }
             }
-            else
-            {
-                ShowForm = true;
-            }
+            ShowForm = true;
         }
 
         private async void OnLoginClicked(object obj)
@@ -83,11 +81,14 @@ namespace BusGuiding.ViewModels
             try
             {
                 await LoadingPopupPage.ShowLoading();
-                var loginResponse = await Models.Api.User.LoginAsync(username, password);
+                var loginResponse = await Models.Api.User.LoginAsync(cleanUsername, cleanPassword);
                 //Store the token
                 Preferences.Set(Constants.PreferenceKeys.UserApiToken, loginResponse["token"]);
                 //Store the role
                 Preferences.Set(Constants.PreferenceKeys.UserRole, loginResponse["role"]);
+                //Send current notification token
+                string currentNotificationToken = await NotificationHandler.Instance.GetTokenAsync();
+                await Models.Api.User.UpdateNotificationTokenAsync(loginResponse["token"], currentNotificationToken);
                 //Load the page
                 await LoadingPopupPage.HideLoadingAsync();
                 (App.Current.MainPage as AppShell).SetLoggedUserContextAsync();

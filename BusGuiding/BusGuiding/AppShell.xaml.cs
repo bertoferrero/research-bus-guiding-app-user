@@ -16,6 +16,11 @@ namespace BusGuiding
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute("devdelaytests/fcm", typeof(Views.Dev.FCMTestPage));
+            Routing.RegisterRoute("devdelaytests/gtfs", typeof(Views.Dev.GTFSTestPage));
+            Routing.RegisterRoute("devdelaytests/internallocation", typeof(Views.Dev.InternalLocationTestPage));
+            Routing.RegisterRoute("devfunctionaltests/driver", typeof(Views.Dev.DriverDemoTestPage));
+            //Routing.RegisterRoute("devfunctionaltests/rider", typeof(Views.Dev.GTFSTestPage));
         }
 
         public async void SetLoggedUserContextAsync()
@@ -44,6 +49,7 @@ namespace BusGuiding
         {
             //FlyoutItems = DevFlyoutItems;
             DevDelaysMenu.FlyoutItemIsVisible = true;
+            DevFunctionalDemoMenu.FlyoutItemIsVisible = true;
             //browse to dev main page
             await Shell.Current.GoToAsync("//devdelaytests");
         }

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BusGuiding.Views.Dev.InternalLocationTestPage">
+
+    <StackLayout>
+        <Entry Placeholder="Route ID" x:Name="RouteIdEntry" />
+        <Entry Placeholder="Vehicle ID" x:Name="VehicleIdEntry" />
+        <Button Text="Start" x:Name="StartButton" Clicked="StartButton_Clicked"/>
+        <Button Text="Stopped" x:Name="StoppedButton" Clicked="StoppedButton_Clicked"  IsVisible="False"/>
+        <Button Text="Next stop" x:Name="NextStopButton" Clicked="NextStopButton_Clicked"  IsVisible="False"/>
+        <Label Text="" x:Name="SentStatusLabel"/>
+        <Label Text="" x:Name="GPSStatusLabel"/>
+    </StackLayout>
+
+</ContentPage>
