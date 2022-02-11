@@ -4,6 +4,16 @@
              x:Class="BusGuiding.Views.Dev.DriverDemoTestPage">
 
     <StackLayout>
+        <StackLayout x:Name="NotRunningLayout">
+            <Entry Placeholder="Route ID" x:Name="RouteIdEntry" />
+            <Entry Placeholder="Vehicle ID" x:Name="VehicleIdEntry" />
+            <Entry Placeholder="Last Stop ID" x:Name="LastStopId" />
+            <Button Text="Start" x:Name="StartButton" Clicked="StartButton_ClickedAsync"/>
+        </StackLayout>
+        <StackLayout x:Name="RunningLayout">
+        </StackLayout>
+
+        <Label Text="" x:Name="GeneralLog"/>
     </StackLayout>
 
 </ContentPage>
