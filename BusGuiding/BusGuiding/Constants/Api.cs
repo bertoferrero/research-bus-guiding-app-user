@@ -14,5 +14,6 @@ namespace BusGuiding.Constants
         public static string SampleLog => "/samplelog";
         public static string NotificationLog => "/notificationlog";
         public static string RoutePath => "/route";
+        public static string StopRequestPath => "/stoprequest";
     }
 }

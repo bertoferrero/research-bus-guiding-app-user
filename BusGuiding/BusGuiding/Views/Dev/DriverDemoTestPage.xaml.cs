@@ -13,8 +13,6 @@ namespace BusGuiding.Views.Dev
     public partial class DriverDemoTestPage : ContentPage
     {
         private bool testRunning = false;
-        private List<Dictionary<string, string>> stopsList = null;
-        private int currentStopListIndex = 0;
 
         public DriverDemoTestPage()
         {
@@ -46,46 +44,61 @@ namespace BusGuiding.Views.Dev
         //Al pulsar en Stop
         //
 
+        private void StartButton_ClickedAsync(object sender, EventArgs e)
+        {
+            if (testRunning)
+            {
+                stopTest();
+            }
+            else
+            {
+                StartTest();
+            }
+        }
 
-        private async void StartButton_ClickedAsync(object sender, EventArgs e)
+        private async void StartTest()
         {
             string routeId = RouteIdEntry.Text.Trim();
             string vehicleId = VehicleIdEntry.Text.Trim();
-            string lastStop = LastStopId.Text.Trim();
-            if (String.IsNullOrEmpty(routeId) || String.IsNullOrEmpty(vehicleId) || String.IsNullOrEmpty(lastStop))
+            string initialStop = InitialStop.Text.Trim();
+            string finalStop = FinalStop.Text.Trim();
+            if (String.IsNullOrEmpty(routeId) || String.IsNullOrEmpty(vehicleId) || String.IsNullOrEmpty(initialStop) || String.IsNullOrEmpty(finalStop))
             {
-                GeneralLog.Text = "Route, Stop and Vehicle fields must be filled";
+                GeneralLog.Text = "Route, Stops and Vehicle fields must be filled";
                 return;
             }
             GeneralLog.Text = "";
-            currentStopListIndex = 0;
-
-            //Get stop list
-            stopsList = null;
+            List<Dictionary<string,string>> busStops;
             try
             {
-                var busStops = await Models.Api.Route.GetOne(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), routeId);
+                busStops = await Models.Api.Route.GetOne(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), routeId);
                 if(busStops.Count == 0)
                 {
                     GeneralLog.Text = "There are not stops for this route";
                     return;
                 }
                 //Search lastStopIdIndex
-                var stopFound = false;
-                for(currentStopListIndex = 0; currentStopListIndex < busStops.Count; currentStopListIndex++)
-                {
-                    if(busStops[currentStopListIndex]["code"] == lastStop)
+                bool initialStopFound = false;
+                bool finalStopFound = false;
+                foreach(Dictionary<string, string> stop in busStops) { 
+                    if(stop["code"] == initialStop)
                     {
-                        stopFound = true;
+                        initialStopFound = true;
+                    }
+                    if (stop["code"] == finalStop)
+                    {
+                        finalStopFound = true;
+                    }
+                    if(initialStopFound && finalStopFound)
+                    {
                         break;
                     }
                 }
-                if(stopFound == false)
+                if(!initialStopFound || !finalStopFound)
                 {
-                    GeneralLog.Text = "The selected stop is not in the route's list";
+                    GeneralLog.Text = "The selected stops are not in the route's list";
                     return;
                 }
-                stopsList = busStops;
             }
             catch (Exception ex)
             {
@@ -99,21 +112,91 @@ namespace BusGuiding.Views.Dev
             {
                 return;
             }
-        }
 
-        private async Task<bool> simulateNextBusStopRequest()
-        {
-            //Get next stop
-            currentStopListIndex++;
-            if(currentStopListIndex >= stopsList.Count)
+            //register events of NotificanHandler
+            NotificationHandler.Instance.NewNotification += NotificationHandler_NewNotification;
+
+            //Request the stop for each stop between the initial and final ones
+            bool sendRequest = false;
+            try
             {
-                currentStopListIndex = 0;
+                do
+                {
+                    foreach (Dictionary<string, string> stop in busStops)
+                    {
+                        if (!sendRequest)
+                        {
+                            if(stop["code"] == initialStop)
+                            {
+                                sendRequest = true;
+                            }
+                        }
+
+                        _ = Models.Api.StopRequest.RequestVehicleStopAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), vehicleId, stop["code"]);   
+
+                        if (sendRequest)
+                        {
+                            if (stop["code"] == finalStop)
+                            {
+                                sendRequest = false;
+                                break;
+                            }
+                        }
+                    }
+                } while (sendRequest);
+            }
+            catch (Exception ex)
+            {
+                //TODO Connection error
+                GeneralLog.Text = $"Connection error getting stops " + ex.Message;
+                return;
             }
 
-            var nextStop = stopsList[currentStopListIndex];
-
-
+            //Display change
+            RouteIdEntry.IsEnabled = VehicleIdEntry.IsEnabled = InitialStop.IsEnabled = FinalStop.IsEnabled = false;
+            StoppedButton.IsVisible = true;
+            StartButton.Text = "Stop";
+            testRunning = true;
         }
+
+        private async void stopTest()
+        {
+
+            //unregister events from NotificationHandler
+            NotificationHandler.Instance.NewNotification -= NotificationHandler_NewNotification;
+            //invalidate pendent requests
+            _ = Models.Api.StopRequest.InvalidatePendentRequestsAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""));
+            //Change screen
+            RouteIdEntry.IsEnabled = VehicleIdEntry.IsEnabled = InitialStop.IsEnabled = FinalStop.IsEnabled = true;
+            StoppedButton.IsVisible = false;
+            StartButton.Text = "Stop";
+            testRunning = false;
+        }
+
+        private async void NotificationHandler_NewNotification(object sender, IDictionary<string, string> e)
+        {
+            try
+            {
+                GeneralLog.Text = "Notificacion de parada recibida";
+                //await Models.Api.NotificationLog.UpdateNotificationLog(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), logId, DateTime.UtcNow);
+            }
+            catch (ConnectionException ex)
+            {
+                //TODO Connection error
+                int a = 3;
+            }
+            catch (StatusCodeException ex)
+            {
+                //Login error
+                int b = 4;
+            }
+        }
+
+        private void StoppedButton_Clicked(object sender, EventArgs e)
+        {
+            _ = SendSampleAsync("t2.1_vehicle_stop_signal");
+        }
+
 
         private async Task<bool> SendVehicleAndRouteAsync(string vehicleId, string routeId)
         {
@@ -137,5 +220,27 @@ namespace BusGuiding.Views.Dev
                 return false;
             }
         }
+
+        private async Task SendSampleAsync(string sampleType, string extraData = "")
+        {
+            try
+            {
+                GeneralLog.Text = $"Sending {sampleType}";
+                await Models.Api.SampleLog.AddSampleLog(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), sampleType, DateTime.UtcNow, extraData);
+                GeneralLog.Text = $"Sent {sampleType}";
+            }
+            catch (ConnectionException ex)
+            {
+                //TODO Connection error
+                GeneralLog.Text = $"Connection error {sampleType}";
+            }
+            catch (StatusCodeException ex)
+            {
+                //Login error
+                GeneralLog.Text = $"Status code error {sampleType}";
+            }
+        }
+
+
     }
 }
