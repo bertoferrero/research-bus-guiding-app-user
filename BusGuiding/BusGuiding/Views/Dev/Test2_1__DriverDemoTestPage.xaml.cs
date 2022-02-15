@@ -10,11 +10,11 @@ using Xamarin.Forms;
 
 namespace BusGuiding.Views.Dev
 {
-    public partial class DriverDemoTestPage : ContentPage
+    public partial class Test2_1__DriverDemoTestPage : ContentPage
     {
         private bool testRunning = false;
 
-        public DriverDemoTestPage()
+        public Test2_1__DriverDemoTestPage()
         {
             InitializeComponent();
         }
@@ -149,7 +149,7 @@ namespace BusGuiding.Views.Dev
             catch (Exception ex)
             {
                 //TODO Connection error
-                GeneralLog.Text = $"Connection error getting stops " + ex.Message;
+                GeneralLog.Text = $"Connection error sending stop requests " + ex.Message;
                 return;
             }
 
@@ -167,6 +167,8 @@ namespace BusGuiding.Views.Dev
             NotificationHandler.Instance.NewNotification -= NotificationHandler_NewNotification;
             //invalidate pendent requests
             _ = Models.Api.StopRequest.InvalidatePendentRequestsAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""));
+            //Unlink user and driver
+            _ = SendVehicleAndRouteAsync("", "");
             //Change screen
             RouteIdEntry.IsEnabled = VehicleIdEntry.IsEnabled = InitialStop.IsEnabled = FinalStop.IsEnabled = true;
             StoppedButton.IsVisible = false;

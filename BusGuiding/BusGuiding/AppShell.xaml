@@ -9,8 +9,8 @@
         <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
     </Tab>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="false">
-        <ShellContent x:Name="DevDelaysMenu" Title="Delay tests" ContentTemplate="{DataTemplate viewsdev:DelayTestsPage}" FlyoutItemIsVisible="False" Route="devdelaytests"/>
-        <ShellContent x:Name="DevFunctionalDemoMenu" Title="Functional demos" ContentTemplate="{DataTemplate viewsdev:FunctionalDemoTestsPage}" FlyoutItemIsVisible="False" Route="devfunctionaltests"/>
+        <ShellContent x:Name="DevDelaysMenu" Title="Tests 1 Delay tests" ContentTemplate="{DataTemplate viewsdev:DelayTestsPage}" FlyoutItemIsVisible="False" Route="devdelaytests"/>
+        <ShellContent x:Name="DevFunctionalDemoMenu" Title="Tests 2 Functional demos" ContentTemplate="{DataTemplate viewsdev:FunctionalDemoTestsPage}" FlyoutItemIsVisible="False" Route="devfunctionaltests"/>
     </FlyoutItem>
 
 </Shell>

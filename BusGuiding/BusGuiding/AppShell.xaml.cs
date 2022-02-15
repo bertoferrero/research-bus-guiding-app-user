@@ -19,7 +19,8 @@ namespace BusGuiding
             Routing.RegisterRoute("devdelaytests/fcm", typeof(Views.Dev.FCMTestPage));
             Routing.RegisterRoute("devdelaytests/gtfs", typeof(Views.Dev.GTFSTestPage));
             Routing.RegisterRoute("devdelaytests/internallocation", typeof(Views.Dev.InternalLocationTestPage));
-            Routing.RegisterRoute("devfunctionaltests/driver", typeof(Views.Dev.DriverDemoTestPage));
+            Routing.RegisterRoute("devfunctionaltests/driver", typeof(Views.Dev.Test2_1__DriverDemoTestPage));
+            Routing.RegisterRoute("devfunctionaltests/rider", typeof(Views.Dev.Test2_2__RiderDemoTestPage));
             //Routing.RegisterRoute("devfunctionaltests/rider", typeof(Views.Dev.GTFSTestPage));
         }
 

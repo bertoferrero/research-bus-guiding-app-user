@@ -19,8 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Dev\DriverDemoTestPage.xaml.cs">
-      <DependentUpon>DriverDemoTestPage.xaml</DependentUpon>
+    <Compile Update="Views\Dev\Test2_2__RiderDemoTestPage.xaml.cs">
+      <DependentUpon>Test2_2__RiderDemoTestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Dev\Test2_1__DriverDemoTestPage.xaml.cs">
+      <DependentUpon>Test2_1__DriverDemoTestPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Dev\InternalLocationTestPage.xaml.cs">
       <DependentUpon>InternalLocationTestPage.xaml</DependentUpon>

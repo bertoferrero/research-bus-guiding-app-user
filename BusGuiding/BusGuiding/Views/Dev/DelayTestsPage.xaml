@@ -4,9 +4,9 @@
              x:Class="BusGuiding.Views.Dev.DelayTestsPage">
 
     <StackLayout>
-        <Button Text="FCM Delay Test" Clicked="FCM_Button_ClickedAsync"/>
-        <Button Text="GTFS Delay test" Clicked="GTFS_Button_ClickedAsync"/>
-        <Button Text="Internal location Delay test" Clicked="InternalLocation_Button_ClickedAsync"/>
+        <Button Text="T1.1 FCM Delay Test" Clicked="FCM_Button_ClickedAsync"/>
+        <Button Text="T1.2.1 and 1.2.2 GTFS Delay test" Clicked="GTFS_Button_ClickedAsync"/>
+        <Button Text="T 1.2.3 Internal location Delay test" Clicked="InternalLocation_Button_ClickedAsync"/>
     </StackLayout>
 
 </ContentPage>

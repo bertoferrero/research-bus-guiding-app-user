@@ -4,8 +4,8 @@
              x:Class="BusGuiding.Views.Dev.FunctionalDemoTestsPage">
 
     <StackLayout>
-        <Button Text="Driver Demo Test" Clicked="Driver_Button_ClickedAsync"/>
-        <!--<Button Text="GTFS Delay test" Clicked="GTFS_Button_ClickedAsync"/>-->
+        <Button Text="T2.1 Driver Demo Test" Clicked="Driver_Button_ClickedAsync"/>
+        <Button Text="T2.2 Rider Demo Test" Clicked="Rider_Button_ClickedAsync"/>
     </StackLayout>
 
 </ContentPage>

@@ -19,5 +19,10 @@ namespace BusGuiding.Views.Dev
         {
             await Shell.Current.GoToAsync("driver");
         }
+
+        private async void Rider_Button_ClickedAsync(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("rider");
+        }
     }
 }
