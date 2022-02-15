@@ -52,11 +52,11 @@ namespace BusGuiding.Views.Dev
             }
             else
             {
-                StartTest();
+                startTest();
             }
         }
 
-        private async void StartTest()
+        private async void startTest()
         {
             string routeId = RouteIdEntry.Text.Trim();
             string vehicleId = VehicleIdEntry.Text.Trim();
@@ -132,10 +132,11 @@ namespace BusGuiding.Views.Dev
                             }
                         }
 
-                        _ = Models.Api.StopRequest.RequestVehicleStopAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), vehicleId, stop["code"]);   
 
                         if (sendRequest)
                         {
+                            _ = Models.Api.StopRequest.RequestVehicleStopAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), vehicleId, stop["code"]);
+
                             if (stop["code"] == finalStop)
                             {
                                 sendRequest = false;
@@ -159,7 +160,7 @@ namespace BusGuiding.Views.Dev
             testRunning = true;
         }
 
-        private async void stopTest()
+        private void stopTest()
         {
 
             //unregister events from NotificationHandler
@@ -169,32 +170,25 @@ namespace BusGuiding.Views.Dev
             //Change screen
             RouteIdEntry.IsEnabled = VehicleIdEntry.IsEnabled = InitialStop.IsEnabled = FinalStop.IsEnabled = true;
             StoppedButton.IsVisible = false;
-            StartButton.Text = "Stop";
+            StartButton.Text = "Start";
             testRunning = false;
         }
 
-        private async void NotificationHandler_NewNotification(object sender, IDictionary<string, string> e)
+        private void NotificationHandler_NewNotification(object sender, IDictionary<string, string> e)
         {
-            try
+            if(e["notification_type"] != "StopRequest")
             {
-                GeneralLog.Text = "Notificacion de parada recibida";
-                //await Models.Api.NotificationLog.UpdateNotificationLog(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), logId, DateTime.UtcNow);
+                return;
             }
-            catch (ConnectionException ex)
-            {
-                //TODO Connection error
-                int a = 3;
-            }
-            catch (StatusCodeException ex)
-            {
-                //Login error
-                int b = 4;
-            }
+            var extraData = $"vehicle_id: {e["vehicle_id"]}, line_id: {e["line_id"]}, status: {e["status"]}, stop_id:{e["stop_id"]}";
+            GeneralLog.Text = "Notificacion de parada recibida";
+            _ = SendSampleAsync("t2.1_notification_received", extraData);
         }
 
         private void StoppedButton_Clicked(object sender, EventArgs e)
         {
             _ = SendSampleAsync("t2.1_vehicle_stop_signal");
+            GeneralLog.Text = "Stop signal sent";
         }
 
 
