@@ -147,7 +147,7 @@ namespace BusGuiding.Views.Dev
                 var latitude = location.Latitude;
                 var longitude = location.Longitude;
                 _ = Models.Api.User.UpdateDriverLatitudeLongitude(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), latitude, longitude);
-                _ = SendSampleAsync("geolocation_update");
+                _ = SendSampleAsync("geolocation_update", location.ToString());
                 GPSStatusLabel.Text = $"Sent GPS {latitude} {longitude}";
             }
             catch(Exception ex){
@@ -155,12 +155,12 @@ namespace BusGuiding.Views.Dev
             }
         }
 
-        private async Task SendSampleAsync(string sampleType)
+        private async Task SendSampleAsync(string sampleType, string extraData = "")
         {
             try
             {
                 SentStatusLabel.Text = $"Sending {sampleType}";
-                await Models.Api.SampleLog.AddSampleLog(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), sampleType, DateTime.UtcNow);
+                await Models.Api.SampleLog.AddSampleLog(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), sampleType, DateTime.UtcNow, extraData);
                 SentStatusLabel.Text = $"Sent {sampleType}";
             }
             catch (ConnectionException ex)

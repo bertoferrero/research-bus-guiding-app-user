@@ -43,7 +43,7 @@ namespace BusGuiding.Models.Api
         }
         public static async Task<Dictionary<string, string>> UpdateDriverLatitudeLongitude(string apiToken, double latitude, double longitude)
         {
-            Dictionary<string, double> data = new Dictionary<string, double> { { "lat", latitude }, { "lon", longitude } };
+            Dictionary<string, string> data = new Dictionary<string, string> { { "lat", latitude.ToString() }, { "lon", longitude.ToString() } };
             return await ExecuteRequest<Dictionary<string, string>>(Constants.Api.UserPath, Method.PUT, apiToken, data);
         }
     }
