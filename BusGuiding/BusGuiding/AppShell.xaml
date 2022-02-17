@@ -3,14 +3,17 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:BusGuiding.Views"
        xmlns:viewsdev="clr-namespace:BusGuiding.Views.Dev"
+       xmlns:viewsdriver="clr-namespace:BusGuiding.Views.Driver"
        x:Name="shell"
        x:Class="BusGuiding.AppShell">
     <Tab>
-        <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
+        <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" Route="login" />
     </Tab>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="false">
         <ShellContent x:Name="DevDelaysMenu" Title="Tests 1 Delay tests" ContentTemplate="{DataTemplate viewsdev:DelayTestsPage}" FlyoutItemIsVisible="False" Route="devdelaytests"/>
         <ShellContent x:Name="DevFunctionalDemoMenu" Title="Tests 2 Functional demos" ContentTemplate="{DataTemplate viewsdev:FunctionalDemoTestsPage}" FlyoutItemIsVisible="False" Route="devfunctionaltests"/>
+        <ShellContent ContentTemplate="{DataTemplate viewsdriver:RouteAndVehicleChoosing}" Route="driver"  FlyoutItemIsVisible="False"/>
     </FlyoutItem>
+    <MenuItem Text="Logout" x:Name="LogoutItem" Clicked="LogoutItem_Clicked"/>
 
 </Shell>
