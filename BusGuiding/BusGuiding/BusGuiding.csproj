@@ -40,13 +40,16 @@
     <Compile Update="Views\Dev\DelayTestsPage.xaml.cs">
       <DependentUpon>DelayTestsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Driver\DriverPage.xaml.cs">
+      <DependentUpon>DriverPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="AppShell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Driver\RouteAndVehicleChoosing.xaml">
+    <EmbeddedResource Update="Views\Driver\DriverPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusGuiding.ViewModels.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace BusGuiding.Views.Driver
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RouteAndVehicleChoosing : ContentPage
+    public partial class DriverPage : ContentPage
     {
-        public RouteAndVehicleChoosing()
+        public DriverPage()
         {
             InitializeComponent();
+            this.BindingContext = new DriverViewModel();
         }
     }
 }
