@@ -29,11 +29,10 @@ namespace BusGuiding.Views.Dev
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            //TODO desubscripcion de eventos
-            //TODO desvinculado de usuario y vehiculo
-            //TODO desubscripción de eventos locales
-            //TODO limpieza de formulario
-            //TODO ocultar panel de trabajo
+            if (testRunning)
+            {
+                stopTest();
+            }
         }
 
         //Al pinchar en comenzar

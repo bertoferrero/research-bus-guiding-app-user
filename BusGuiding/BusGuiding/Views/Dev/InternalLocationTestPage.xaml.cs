@@ -140,15 +140,22 @@ namespace BusGuiding.Views.Dev
         {
             try
             {
-                var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10000));
+                var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(30));
                 gpsCancellationToken = new CancellationTokenSource();
                 var location = await Geolocation.GetLocationAsync(request, gpsCancellationToken.Token);
                 gpsCancellationToken = null;
-                var latitude = location.Latitude;
-                var longitude = location.Longitude;
-                _ = Models.Api.User.UpdateDriverLatitudeLongitude(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), latitude, longitude);
-                _ = SendSampleAsync("geolocation_update", location.ToString());
-                GPSStatusLabel.Text = $"Sent GPS {latitude} {longitude}";
+                if (location != null)
+                {
+                    var accuracy = location.Accuracy;
+                    if (accuracy <= 20)
+                    {
+                        var latitude = location.Latitude;
+                        var longitude = location.Longitude;
+                        _ = Models.Api.User.UpdateDriverLatitudeLongitude(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), latitude, longitude);
+                        _ = SendSampleAsync("geolocation_update", location.ToString());
+                        GPSStatusLabel.Text = $"Sent GPS {latitude} {longitude}";
+                    }
+                }
             }
             catch(Exception ex){
                 GPSStatusLabel.Text = "Exception happend getting or sending geolocation: " + ex.Message;
