@@ -22,6 +22,7 @@ namespace BusGuiding.ViewModels.Driver
             set {
                 SetProperty(ref showChoosingRouteForm, value);
                 ShowChoosingRouteForm = !value;
+                ShowRunningForm = value;
             }
         }
 
@@ -30,10 +31,9 @@ namespace BusGuiding.ViewModels.Driver
         {
             this._messageService = DependencyService.Get<Services.IMessageService>();
             StartCommand = new Command(OnStartClicked);
+            FinishCommand = new Command(OnFinishClicked);
             _ = initialiseAsync();
         }
-
-        partial void switchToWorkingScreen(); //Called when its time to show the working screen
 
 
     }

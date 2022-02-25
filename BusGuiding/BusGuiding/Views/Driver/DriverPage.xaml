@@ -5,12 +5,33 @@
     <ContentPage.Content>
         <StackLayout Margin="10"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowChoosingRouteForm}">
-            <!--<Label Text="User"/>-->
-            <Picker Title="" ItemsSource="{Binding RouteList}" SelectedIndex="{Binding RouteListSelectedIndex}"/>
-            <!--<Label Text="Password" />-->
-            <Entry Placeholder="Vehicle ID" Text="{Binding VehicleID}"/>
-            <Button Text="Start" Command="{Binding StartCommand}"/>
+                HorizontalOptions="FillAndExpand">
+            <StackLayout IsVisible="{Binding ShowChoosingRouteForm}">
+                <Label Text="Route"/>
+                <Picker Title="" ItemsSource="{Binding RouteList}" SelectedIndex="{Binding RouteListSelectedIndex}"/>
+                <Label Text="Vehicle ID"/>
+                <Entry Placeholder="Vehicle ID" Text="{Binding VehicleID}"/>
+                <Button Text="Start" Command="{Binding StartCommand}"/>
+            </StackLayout>
+
+            <Grid IsVisible="{Binding ShowRunningForm}" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout VerticalOptions="FillAndExpand" Grid.Row="0">
+                <Label Text="System is now running. You can turn off this device screen, the application will turn it on."/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
+                    <Label Text="Send GPS data" VerticalOptions="Center"/>
+                    <Switch IsToggled="false" VerticalOptions="Center"/>
+                </StackLayout>
+                </StackLayout>
+                <Button Text="Finish" Command="{Binding FinishCommand}" VerticalOptions="EndAndExpand" Grid.Row="1"/>
+            </Grid>
+            <!--
+            <StackLayout IsVisible="{Binding ShowRunningForm}" HorizontalOptions="Center">
+                
+            </StackLayout>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
