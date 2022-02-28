@@ -18,5 +18,12 @@ namespace BusGuiding.Views.Driver
             InitializeComponent();
             this.BindingContext = new DriverViewModel();
         }
+
+        protected override void OnDisappearing()
+        {
+            (this.BindingContext as DriverViewModel).OnDisappearing();
+            base.OnDisappearing();
+            
+        }
     }
 }

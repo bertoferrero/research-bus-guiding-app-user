@@ -35,6 +35,11 @@ namespace BusGuiding.ViewModels.Driver
             _ = initialiseAsync();
         }
 
+        public void OnDisappearing()
+        {
+            IsRunning = false;
+        }
+
 
     }
 }
