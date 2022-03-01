@@ -47,6 +47,7 @@ namespace BusGuiding.ViewModels.Driver
         partial void runningFinalize()
         {
             setGpsService(false);
+            NotificationHandler.Instance.NewNotification -= NotificationHandler_NewNotification;
         }
 
         public void OnFinishClicked()
@@ -54,15 +55,18 @@ namespace BusGuiding.ViewModels.Driver
             IsRunning = false;
         }
 
-        private async void startRunning()
+        private void startRunning()
         {
+            //Inicializamos las notificaciones
+            NotificationHandler.Instance.NewNotification += NotificationHandler_NewNotification;
         }
 
         private async void stopRunningAsync()
         {
             //ponemos el waiting
             await LoadingPopupPage.ShowLoading();
-            //TODO Paramos listener de eventos
+            //Paramos listener de eventos
+            NotificationHandler.Instance.NewNotification -= NotificationHandler_NewNotification;
             //Paramos listener del gps
             SendGpsSwitchToggle = false;
             //https://github.com/xamarin/monodroid-samples/tree/main/ApplicationFundamentals/ServiceSamples/ForegroundServiceDemo
@@ -88,6 +92,19 @@ namespace BusGuiding.ViewModels.Driver
             {
                 currentService.Stop();
             }
+        }
+
+
+        private void NotificationHandler_NewNotification(object sender, IDictionary<string, string> e)
+        {
+            int a = 3;
+            /*if (e["notification_type"] != "StopRequest")
+            {
+                return;
+            }
+            var extraData = $"vehicle_id: {e["vehicle_id"]}, line_id: {e["line_id"]}, status: {e["status"]}, stop_id:{e["stop_id"]}";
+            GeneralLog.Text = "Notificacion de parada recibida";
+            _ = SendSampleAsync("t2.1_notification_received", extraData);*/
         }
     }
 }
