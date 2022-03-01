@@ -32,16 +32,22 @@ namespace BusGuiding.Droid.DependencyService
             initialise();
             if (startServiceIntent != null)
             {
-                //TODO si esta launched, enviar reiniciar, ver si es posible con el ejemplo
+                if (isLaunched)
+                {
+                    Stop();
+                }
+
                 Platform.CurrentActivity.StartForegroundService(startServiceIntent);
+                isLaunched = true;
             }
         }
 
         public void Stop()
         {
-            if (initialised && stopServiceIntent != null)
+            if (initialised && stopServiceIntent != null && isLaunched)
             {
                 Platform.CurrentActivity.StopService(stopServiceIntent);
+                isLaunched = false;
             }
         }
 
@@ -54,6 +60,8 @@ namespace BusGuiding.Droid.DependencyService
 
                 stopServiceIntent = new Intent(Platform.CurrentActivity, typeof(GPSSenderService));
                 stopServiceIntent.SetAction("GPSSenderService.action.STOP_SERVICE");
+
+                initialised = true;
             }
         }
     }

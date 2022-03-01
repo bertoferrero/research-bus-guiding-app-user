@@ -23,7 +23,7 @@
                 <Label Text="System is now running. You can turn off this device screen, the application will turn it on."/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
                     <Label Text="Send GPS data" VerticalOptions="Center"/>
-                    <Switch IsToggled="false" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding SendGpsSwitchToggle}}" VerticalOptions="Center"/>
                 </StackLayout>
                 </StackLayout>
                 <Button Text="Finish" Command="{Binding FinishCommand}" VerticalOptions="EndAndExpand" Grid.Row="1"/>

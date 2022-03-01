@@ -1,4 +1,5 @@
-﻿using BusGuiding.Models.Api.Exceptions;
+﻿using BusGuiding.DependencyServices;
+using BusGuiding.Models.Api.Exceptions;
 using BusGuiding.Views.Tools;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace BusGuiding.ViewModels.Driver
     {
         private bool showRunningForm = false;
         public Command FinishCommand { get; }
+        private bool sendGpsSwitchToggle = false;
 
         public bool ShowRunningForm
         {
@@ -32,6 +34,21 @@ namespace BusGuiding.ViewModels.Driver
             }
         }
 
+        public bool SendGpsSwitchToggle
+        {
+            get => sendGpsSwitchToggle;
+            set
+            {
+                setGpsService(value);
+                SetProperty(ref sendGpsSwitchToggle, value);
+            }
+        }
+
+        partial void runningFinalize()
+        {
+            setGpsService(false);
+        }
+
         public void OnFinishClicked()
         {
             IsRunning = false;
@@ -39,7 +56,6 @@ namespace BusGuiding.ViewModels.Driver
 
         private async void startRunning()
         {
-
         }
 
         private async void stopRunningAsync()
@@ -47,7 +63,8 @@ namespace BusGuiding.ViewModels.Driver
             //ponemos el waiting
             await LoadingPopupPage.ShowLoading();
             //TODO Paramos listener de eventos
-            //TODO Paramos listener del gps
+            //Paramos listener del gps
+            SendGpsSwitchToggle = false;
             //https://github.com/xamarin/monodroid-samples/tree/main/ApplicationFundamentals/ServiceSamples/ForegroundServiceDemo
             //desenlazamos conductor y vehículo
             try
@@ -58,6 +75,19 @@ namespace BusGuiding.ViewModels.Driver
             {
             }
             await LoadingPopupPage.HideLoadingAsync();
+        }
+
+        private void setGpsService(bool active)
+        {
+            ILocationSenderService currentService = DependencyService.Get<ILocationSenderService>();
+            if (active)
+            {
+                currentService.Start();
+            }
+            else
+            {
+                currentService.Stop();
+            }
         }
     }
 }

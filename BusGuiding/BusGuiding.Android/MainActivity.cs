@@ -7,6 +7,7 @@ using Android.OS;
 using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
+using BusGuiding.Droid.DependencyService;
 
 namespace BusGuiding.Droid
 {
@@ -27,6 +28,14 @@ namespace BusGuiding.Droid
             IsPlayServicesAvailable();
             CreateNotificationChannel();
         }
+        protected override void OnDestroy()
+        {
+            //Nos aseguramos de que todos los servicios se paran
+            var locationService = new LocationSenderService();
+            locationService.Stop();
+            base.OnDestroy();
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

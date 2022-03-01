@@ -21,9 +21,15 @@ namespace BusGuiding.Views.Driver
 
         protected override void OnDisappearing()
         {
-            (this.BindingContext as DriverViewModel).OnDisappearing();
+            //(this.BindingContext as DriverViewModel).OnDisappearing();
             base.OnDisappearing();
             
+        }
+
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }

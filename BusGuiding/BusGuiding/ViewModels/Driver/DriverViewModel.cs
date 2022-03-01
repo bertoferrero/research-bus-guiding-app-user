@@ -35,10 +35,16 @@ namespace BusGuiding.ViewModels.Driver
             _ = initialiseAsync();
         }
 
-        public void OnDisappearing()
+        ~DriverViewModel()
         {
-            IsRunning = false;
+            try
+            {
+                runningFinalize();
+            }
+            catch(Exception ex) { }
         }
+
+        partial void runningFinalize();
 
 
     }
