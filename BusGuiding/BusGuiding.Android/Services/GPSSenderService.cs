@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using BusGuiding.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,10 @@ namespace BusGuiding.Droid.Services
             handler = new Handler(Looper.MainLooper);
 
             // This Action is only for demonstration purposes.
-            runnable = new Action(() =>
+            runnable = new Action(async () =>
             {
                 Log.Info(TAG, "RUN");
+                await GeoData.SendGeoDataToServerAsync();
                 /*if (timestamper == null)
                 {
                     Log.Wtf(TAG, "Why isn't there a Timestamper initialized?");
