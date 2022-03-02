@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyServices\LocationSenderService.cs" />
+    <Compile Include="DependencyServices\DeviceTaskManager.cs" />
     <Compile Include="DependencyServices\NotificationService.cs" />
     <Compile Include="FirebaseService.cs" />
     <Compile Include="MainActivity.cs" />
