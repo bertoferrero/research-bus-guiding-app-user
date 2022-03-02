@@ -97,11 +97,16 @@ namespace BusGuiding.ViewModels.Driver
 
         private void NotificationHandler_NewNotification(object sender, IDictionary<string, string> e)
         {
-            int a = 3;
-            /*if (e["notification_type"] != "StopRequest")
+            //Traer aplicacion a primer plano
+            //https://stackoverflow.com/questions/51393431/is-there-a-way-to-bring-an-application-to-foreground-on-push-notification-receiv
+            if (e["notification_type"] != "StopRequest")
             {
                 return;
             }
+
+            NotificationHandler.Instance.ShowNotification("STOP!", $"Stop is required for stop number {e["stop_id"]}", true);
+
+            /*
             var extraData = $"vehicle_id: {e["vehicle_id"]}, line_id: {e["line_id"]}, status: {e["status"]}, stop_id:{e["stop_id"]}";
             GeneralLog.Text = "Notificacion de parada recibida";
             _ = SendSampleAsync("t2.1_notification_received", extraData);*/

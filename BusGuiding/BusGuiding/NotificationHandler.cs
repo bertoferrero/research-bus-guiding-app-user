@@ -61,9 +61,16 @@ namespace BusGuiding
             {
                 NewNotification(this, data);
             }
-            catch (Exception) { }
+            catch (Exception ex) {
+                int a = 3;
+                    }
         }
 
         public async Task<string> GetTokenAsync() => await currentService.GetDeviceTokenAsync();
+
+        public int ShowNotification(string title, string message, bool highImportance = false)
+        {
+            return currentService.ShowNotification(title, message, highImportance);
+        }
     }
 }

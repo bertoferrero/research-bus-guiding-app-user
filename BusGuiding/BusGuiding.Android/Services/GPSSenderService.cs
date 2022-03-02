@@ -134,12 +134,15 @@ namespace BusGuiding.Droid.Services
 
         private string createNotificationChannel(string channelId, string channelName)
         {
-            //https://stackoverflow.com/questions/47531742/startforeground-fail-after-upgrade-to-android-8-1
-            var chan = new NotificationChannel(channelId, channelName, NotificationImportance.None);
-            chan.LockscreenVisibility = NotificationVisibility.Private;
-            //https://docs.microsoft.com/es-es/xamarin/android/app-fundamentals/notifications/local-notifications-walkthrough
-            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
-            notificationManager.CreateNotificationChannel(chan);
+            if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
+            {
+                //https://stackoverflow.com/questions/47531742/startforeground-fail-after-upgrade-to-android-8-1
+                var chan = new NotificationChannel(channelId, channelName, NotificationImportance.None);
+                chan.LockscreenVisibility = NotificationVisibility.Private;
+                //https://docs.microsoft.com/es-es/xamarin/android/app-fundamentals/notifications/local-notifications-walkthrough
+                var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+                notificationManager.CreateNotificationChannel(chan);
+            }
             return channelId;
         }
 
