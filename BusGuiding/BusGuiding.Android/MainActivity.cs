@@ -8,6 +8,7 @@ using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
 using BusGuiding.Droid.DependencyService;
+using Android.Views;
 
 namespace BusGuiding.Droid
 {
@@ -20,6 +21,7 @@ namespace BusGuiding.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            this.Window.AddFlags(WindowManagerFlags.DismissKeyguard | WindowManagerFlags.ShowWhenLocked | WindowManagerFlags.TurnScreenOn);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this);

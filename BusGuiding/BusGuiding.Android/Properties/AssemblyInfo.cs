@@ -35,3 +35,6 @@ using Android.App;
 [assembly: UsesFeature("android.hardware.location.gps", Required = false)]
 [assembly: UsesFeature("android.hardware.location.network", Required = false)]
 [assembly: UsesPermission(Manifest.Permission.AccessBackgroundLocation)]
+[assembly: UsesPermission(Manifest.Permission.SystemAlertWindow)]
+[assembly: UsesPermission(Manifest.Permission.ForegroundService)]
+[assembly: UsesPermission(Manifest.Permission.DisableKeyguard)]

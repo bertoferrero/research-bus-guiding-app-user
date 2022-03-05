@@ -105,6 +105,7 @@ namespace BusGuiding.ViewModels.Driver
             }
 
             NotificationHandler.Instance.ShowNotification("STOP!", $"Stop is required for stop number {e["stop_id"]}", true);
+            DependencyService.Get<IDeviceTaskManager>().BringToForeground();
 
             /*
             var extraData = $"vehicle_id: {e["vehicle_id"]}, line_id: {e["line_id"]}, status: {e["status"]}, stop_id:{e["stop_id"]}";
