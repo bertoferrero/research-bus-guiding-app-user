@@ -1,5 +1,6 @@
 ﻿using BusGuiding.DependencyServices;
 using BusGuiding.Models.Api.Exceptions;
+using BusGuiding.Views.Driver;
 using BusGuiding.Views.Tools;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,7 @@ namespace BusGuiding.ViewModels.Driver
         {
             setGpsService(false);
             NotificationHandler.Instance.NewNotification -= NotificationHandler_NewNotification;
+            _ = StopAlertPopupPage.CloseStopAlertAsync();
         }
 
         public void OnFinishClicked()
@@ -65,6 +67,8 @@ namespace BusGuiding.ViewModels.Driver
         {
             //ponemos el waiting
             await LoadingPopupPage.ShowLoading();
+            //Cerramos ventanas de alerta
+            _ = StopAlertPopupPage.CloseStopAlertAsync();
             //Paramos listener de eventos
             NotificationHandler.Instance.NewNotification -= NotificationHandler_NewNotification;
             //Paramos listener del gps
@@ -104,13 +108,14 @@ namespace BusGuiding.ViewModels.Driver
                 return;
             }
 
+            //Show the notification
             NotificationHandler.Instance.ShowNotification("STOP!", $"Stop is required for stop number {e["stop_id"]}", true);
+            //Bring the app to the front
             DependencyService.Get<IDeviceTaskManager>().BringToForeground();
-
-            /*
-            var extraData = $"vehicle_id: {e["vehicle_id"]}, line_id: {e["line_id"]}, status: {e["status"]}, stop_id:{e["stop_id"]}";
-            GeneralLog.Text = "Notificacion de parada recibida";
-            _ = SendSampleAsync("t2.1_notification_received", extraData);*/
+            //Show the popup
+            _ = StopAlertPopupPage.ShowStopAlertAsync(e["stop_id"]);
         }
+
+        
     }
 }
