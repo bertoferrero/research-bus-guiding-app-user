@@ -80,7 +80,7 @@ namespace BusGuiding.Droid.DependencyService
 
         public int ShowNotification(string title, string message, bool highImportance = false)
         {
-            string channelId = (highImportance?highPriorityChannelId:lowPriorityChannelId);
+            string channelId = highImportance?highPriorityChannelId:lowPriorityChannelId;
             createNotificationChannel(channelId, channelName);
 
             Intent intent = new Intent(Platform.CurrentActivity, typeof(MainActivity));

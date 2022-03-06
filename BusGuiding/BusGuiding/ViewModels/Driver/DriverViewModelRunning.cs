@@ -103,17 +103,20 @@ namespace BusGuiding.ViewModels.Driver
         {
             //Traer aplicacion a primer plano
             //https://stackoverflow.com/questions/51393431/is-there-a-way-to-bring-an-application-to-foreground-on-push-notification-receiv
-            if (e["notification_type"] != "StopRequest")
+            if (e["notification_type"] == "StopRequest")
             {
-                return;
+                //Show the notification
+                NotificationHandler.Instance.ShowNotification("STOP!", $"Stop is required for stop number {e["stop_id"]}", true);
+                //Bring the app to the front
+                DependencyService.Get<IDeviceTaskManager>().BringToForeground();
+                //Show the popup
+                _ = StopAlertPopupPage.ShowStopAlertAsync(e["stop_id"]);
             }
-
-            //Show the notification
-            NotificationHandler.Instance.ShowNotification("STOP!", $"Stop is required for stop number {e["stop_id"]}", true);
-            //Bring the app to the front
-            DependencyService.Get<IDeviceTaskManager>().BringToForeground();
-            //Show the popup
-            _ = StopAlertPopupPage.ShowStopAlertAsync(e["stop_id"]);
+            else if(e["notification_type"] == "DismissStopRequest")
+            {
+                //Close the notification
+                _ = StopAlertPopupPage.CloseStopAlertAsync();
+            }
         }
 
         
