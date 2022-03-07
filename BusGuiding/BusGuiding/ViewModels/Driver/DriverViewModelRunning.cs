@@ -106,7 +106,7 @@ namespace BusGuiding.ViewModels.Driver
             if (e["notification_type"] == "StopRequest")
             {
                 //Show the notification
-                NotificationHandler.Instance.ShowNotification("STOP!", $"Stop is required for stop number {e["stop_id"]}", true);
+                //NotificationHandler.Instance.ShowNotification("STOP!", $"Stop is required for stop number {e["stop_id"]}", true);
                 //Bring the app to the front
                 DependencyService.Get<IDeviceTaskManager>().BringToForeground();
                 //Show the popup
