@@ -55,7 +55,7 @@ namespace BusGuiding.ViewModels.Driver
             await LoadingPopupPage.ShowLoading();
             try
             {
-                var stopInformation = await Models.Api.Stop.GetOne(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), stopCodeValue);
+                var stopInformation = await Models.Api.Stop.GetOneByStopCode(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), stopCodeValue);
             }
             catch (ConnectionException ex)
             {
@@ -78,11 +78,40 @@ namespace BusGuiding.ViewModels.Driver
                 await LoadingPopupPage.HideLoadingAsync();
             }
 
+            //TODO pasamos a la siguiente pagina
             int a = 3;
         }
-        public  void OnGeolocaliseCommand()
+        public async void OnGeolocaliseCommand()
         {
-            int a = 4;
+            await LoadingPopupPage.ShowLoading();
+            //Get Geolocation
+            var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
+            var location = await Geolocation.GetLocationAsync(request);
+            if (location == null)
+            {
+                await this._messageService.DisplayAlert("Error", "Geolocation data cannot be got. Please try again.", "Close");
+                return;
+
+            }
+            //Request for the nearest stop
+            var latitude = location.Latitude;
+            var longitude = location.Longitude;
+            try
+            {
+                var stopInformation = await Models.Api.Stop.GetNearest(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), latitude, longitude);
+            }
+            catch (Exception ex)
+            {
+                await this._messageService.DisplayAlert("Error", "Connexion error.", "Close");
+                return;
+            }
+            finally
+            {
+                await LoadingPopupPage.HideLoadingAsync();
+            }
+
+            //TODO load next page
+
         }
 
     }
