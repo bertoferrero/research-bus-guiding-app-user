@@ -35,7 +35,7 @@ namespace BusGuiding
             }
             else if (role.Equals(Constants.UserRoles.Rider))
             {
-
+                await SetRiderContextAsync();
             }
             else if (role.Equals(Constants.UserRoles.Driver))
             {
@@ -60,6 +60,11 @@ namespace BusGuiding
         public async Task SetDriverContextAsync()
         {
             await Shell.Current.GoToAsync("//driver");
+        }
+
+        public async Task SetRiderContextAsync()
+        {
+            await Shell.Current.GoToAsync("//rider");
         }
 
         private async void LogoutItem_Clicked(object sender, EventArgs e)

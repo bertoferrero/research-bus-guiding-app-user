@@ -4,6 +4,7 @@
        xmlns:views="clr-namespace:BusGuiding.Views"
        xmlns:viewsdev="clr-namespace:BusGuiding.Views.Dev"
        xmlns:viewsdriver="clr-namespace:BusGuiding.Views.Driver"
+       xmlns:viewsrider="clr-namespace:BusGuiding.Views.Rider"
        x:Name="shell"
        x:Class="BusGuiding.AppShell">
     <Tab>
@@ -13,6 +14,7 @@
         <ShellContent x:Name="DevDelaysMenu" Title="Tests 1 Delay tests" ContentTemplate="{DataTemplate viewsdev:DelayTestsPage}" FlyoutItemIsVisible="False" Route="devdelaytests"/>
         <ShellContent x:Name="DevFunctionalDemoMenu" Title="Tests 2 Functional demos" ContentTemplate="{DataTemplate viewsdev:FunctionalDemoTestsPage}" FlyoutItemIsVisible="False" Route="devfunctionaltests"/>
         <ShellContent ContentTemplate="{DataTemplate viewsdriver:DriverPage}" Route="driver"  FlyoutItemIsVisible="False"/>
+        <ShellContent ContentTemplate="{DataTemplate viewsrider:P2_OriginStopChossing}" Route="rider"  FlyoutItemIsVisible="False"/>
     </FlyoutItem>
     <MenuItem Text="Logout" x:Name="LogoutItem" Clicked="LogoutItem_Clicked"/>
 

@@ -6,7 +6,7 @@ namespace BusGuiding.Constants
 {
     public static class Api
     {
-        public static string ApiEndpoint => "http://475c-185-196-57-199.ngrok.io/api";//"http://research.busguiding.bertoferrero.com/api";
+        public static string ApiEndpoint => "http://1d3b-185-196-57-199.ngrok.io/api";//"http://research.busguiding.bertoferrero.com/api";
         public static string LoginPath => "/login";
         public static string LogoutPath => "/logout";
         public static string UserPath => "/user";
@@ -15,5 +15,6 @@ namespace BusGuiding.Constants
         public static string NotificationLog => "/notificationlog";
         public static string RoutePath => "/route";
         public static string StopRequestPath => "/stoprequest";
+        public static string StopPath => "/stop";
     }
 }
