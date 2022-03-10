@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BusGuiding.Views.Rider.P3_LineSelection"
-             Title="Line selection">
+             x:Class="BusGuiding.Views.Rider.P4_DestinationStopChoosing"
+             Title="Destination stop">
     <ContentPage.Content>
         <StackLayout Margin="10">
             <Label Text="Origin stop:" />
             <Label Text="{Binding StopName}" />
-            <Label Text="Please, select the line you want to get on."/>
+            <Label Text="Line:" />
+            <Label Text="{Binding RouteName}" />
+            <Label Text="Please, select the destination stop where you want to get off."/>
 
-            <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Routes}" SelectedItem="{Binding SelectedRoute}">
+            <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Stops}" SelectedItem="{Binding SelectedStop}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}" />
@@ -17,7 +19,6 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!--<Button Text="Continue"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

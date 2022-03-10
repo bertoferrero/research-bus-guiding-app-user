@@ -26,6 +26,7 @@ namespace BusGuiding
             //Routing.RegisterRoute("driver", typeof(Views.Driver.RouteAndVehicleChoosing));
             //Rider
             Routing.RegisterRoute("rider/p3", typeof(Views.Rider.P3_LineSelection));
+            Routing.RegisterRoute("rider/p4", typeof(Views.Rider.P4_DestinationStopChoosing));
         }
 
         public async void SetLoggedUserContextAsync()

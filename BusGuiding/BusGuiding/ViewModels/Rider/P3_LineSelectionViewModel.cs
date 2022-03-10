@@ -18,6 +18,7 @@ namespace BusGuiding.ViewModels.Driver
     {
         private readonly Services.IMessageService _messageService;
         protected string stopCode = "";
+        public Command ContinueCommand { get; }
         public string StopCode
         {
             get
@@ -60,6 +61,20 @@ namespace BusGuiding.ViewModels.Driver
             }
         }
 
+        protected RouteTmp selectedRoute = null;
+        public RouteTmp SelectedRoute
+        {
+            get
+            {
+                return selectedRoute;
+            }
+            set
+            {
+                SetProperty(ref selectedRoute, value);
+                OnContinueCommand();
+            }
+        }
+
         protected ObservableCollection<RouteTmp> routes = new ObservableCollection<RouteTmp>();
         public ObservableCollection<RouteTmp> Routes
         {
@@ -77,11 +92,13 @@ namespace BusGuiding.ViewModels.Driver
         public P3_LineSelectionViewModel()
         {
             this._messageService = DependencyService.Get<Services.IMessageService>();
+            ContinueCommand = new Command(OnContinueCommand);
             resetView();
         }
 
         public void resetView()
         {
+            SelectedRoute = null;
         }
 
         protected async Task loadRouteListAsync()
@@ -113,8 +130,17 @@ namespace BusGuiding.ViewModels.Driver
                 await LoadingPopupPage.HideLoadingAsync();
             }
         }
+        public async void OnContinueCommand()
+        {
+            if(SelectedRoute != null)
+            {
+                await Shell.Current.GoToAsync($"p4?stop_code={stopCode}&stop_name={stopName}&stop_schema_id={stopSchemaId}&route_schema_id={SelectedRoute.SchemaId}&route_name={SelectedRoute.Name}&route_color={SelectedRoute.Color}");
+                SelectedRoute = null;
+            }
+        }
 
     }
+
 
     public class RouteTmp
     {
