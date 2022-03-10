@@ -56,6 +56,7 @@ namespace BusGuiding.ViewModels.Driver
             try
             {
                 var stopInformation = await Models.Api.Stop.GetOneByStopCode(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), stopCodeValue);
+                _ = navigateToP3Async(stopInformation["code"], stopInformation["name"], stopInformation["id"]);
             }
             catch (ConnectionException ex)
             {
@@ -78,8 +79,6 @@ namespace BusGuiding.ViewModels.Driver
                 await LoadingPopupPage.HideLoadingAsync();
             }
 
-            //TODO pasamos a la siguiente pagina
-            int a = 3;
         }
         public async void OnGeolocaliseCommand()
         {
@@ -99,6 +98,8 @@ namespace BusGuiding.ViewModels.Driver
             try
             {
                 var stopInformation = await Models.Api.Stop.GetNearest(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), latitude, longitude);
+                //load next page
+                _ = navigateToP3Async(stopInformation["code"], stopInformation["name"], stopInformation["id"]);
             }
             catch (Exception ex)
             {
@@ -109,9 +110,17 @@ namespace BusGuiding.ViewModels.Driver
             {
                 await LoadingPopupPage.HideLoadingAsync();
             }
+        }
 
-            //TODO load next page
-
+        /// <summary>
+        /// Performs the navigation to P3 page
+        /// </summary>
+        /// <param name="stopCode"></param>
+        /// <param name="stopName"></param>
+        /// <param name="stopSchemaId"></param>
+        protected async Task navigateToP3Async(string stopCode, string stopName, string stopSchemaId)
+        {
+            await Shell.Current.GoToAsync($"p3?stop_code={stopCode}&stop_name={stopName}&stop_schema_id={stopSchemaId}");
         }
 
     }
