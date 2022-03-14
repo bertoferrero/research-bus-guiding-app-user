@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,14 +26,18 @@ namespace BusGuiding.Views.Tools
 
         public static async Task ShowLoading()
         {
-            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new LoadingPopupPage());
+            //TODO this is a patch, this line must to be moved out from this class
+            UserDialogs.Instance.ShowLoading("Loading, one moment please.");
+            //await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new LoadingPopupPage());
         }
 
         public static async Task HideLoadingAsync()
         {
             try
             {
-                await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
+                //TODO his is a patch
+                UserDialogs.Instance.HideLoading();
+                //await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
             }
             catch(Exception ex)
             {

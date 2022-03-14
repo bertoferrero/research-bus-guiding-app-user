@@ -1,4 +1,5 @@
-﻿using BusGuiding.Models.Api.Exceptions;
+﻿using Acr.UserDialogs;
+using BusGuiding.Models.Api.Exceptions;
 using BusGuiding.Views.Tools;
 using System;
 using System.Collections.Generic;
@@ -113,8 +114,7 @@ namespace BusGuiding.ViewModels.Driver
             set
             {
                 SetProperty(ref selectedStop, value);
-                //Confirmación https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/pop-ups
-                //OnContinueCommand();
+                onStopSelected();
             }
         }
 
@@ -187,6 +187,18 @@ namespace BusGuiding.ViewModels.Driver
             finally
             {
                 await LoadingPopupPage.HideLoadingAsync();
+            }
+        }
+
+        protected async void onStopSelected()
+        {
+            if (SelectedStop != null)
+            {
+                bool answer = await UserDialogs.Instance.ConfirmAsync($"Do you want to travel from {StopName} to {SelectedStop.Name} by using the line {RouteName}?", "Confirmation");
+                if (answer)
+                {
+                    await Shell.Current.GoToAsync($"p5?origin_stop_code={stopCode}&origin_stop_name={stopName}&origin_stop_schema_id={stopSchemaId}&route_schema_id={RouteSchemaId}&route_name={RouteName}&route_color={RouteColor}&destination_stop_code={SelectedStop.Code}&destination_stop_name={SelectedStop.Name}&destination_stop_schema_id={SelectedStop.SchemaId}");
+                }
             }
         }
 

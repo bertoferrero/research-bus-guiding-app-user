@@ -9,6 +9,7 @@ using Firebase.Iid;
 using Android.Util;
 using BusGuiding.Droid.DependencyService;
 using Android.Views;
+using Acr.UserDialogs;
 
 namespace BusGuiding.Droid
 {
@@ -25,6 +26,7 @@ namespace BusGuiding.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this);
+            UserDialogs.Init(this);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
             IsPlayServicesAvailable();
