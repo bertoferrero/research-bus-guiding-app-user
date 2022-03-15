@@ -4,6 +4,7 @@ using BusGuiding.Views.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,8 @@ namespace BusGuiding.ViewModels.Driver
     [QueryProperty(nameof(DestinationStopCode), "destination_stop_code")]
     [QueryProperty(nameof(DestinationStopName), "destination_stop_name")]
     [QueryProperty(nameof(DestinationStopSchemaId), "destination_stop_schema_id")]
-    public class P5_RunningViewModel : BaseViewModel
+    //[QueryProperty(nameof(Subroute), "subroute")]
+    public class P5_RunningViewModel : BaseViewModel, IQueryAttributable, INotifyPropertyChanged
     {
         private readonly Services.IMessageService _messageService;
         protected string currentStatus = "";
@@ -37,18 +39,7 @@ namespace BusGuiding.ViewModels.Driver
                 SetProperty(ref currentStatus, value);
             }
         }
-        protected string originStopCode = "";
-        public string OriginStopCode
-        {
-            get
-            {
-                return originStopCode;
-            }
-            set
-            {
-                SetProperty(ref originStopCode, value);
-            }
-        }
+        public string OriginStopCode { get; private set; }
 
         protected string originStopName = "";
         public string OriginStopName
@@ -62,31 +53,9 @@ namespace BusGuiding.ViewModels.Driver
                 SetProperty(ref originStopName, value);
             }
         }
-        protected string originStopSchemaId = "";
-        public string OriginStopSchemaId
-        {
-            get
-            {
-                return originStopSchemaId;
-            }
-            set
-            {
-                SetProperty(ref originStopSchemaId, value);
-            }
-        }
+        public string OriginStopSchemaId { get; private set; }
 
-        protected string routeSchemaId = "";
-        public string RouteSchemaId
-        {
-            get
-            {
-                return routeSchemaId;
-            }
-            set
-            {
-                SetProperty(ref routeSchemaId, value);
-            }
-        }
+        public string RouteSchemaId { get; private set; }
 
         protected string routeName = "";
         public string RouteName
@@ -114,18 +83,7 @@ namespace BusGuiding.ViewModels.Driver
             }
         }
 
-        protected string destinationStopCode = "";
-        public string DestinationStopCode
-        {
-            get
-            {
-                return destinationStopCode;
-            }
-            set
-            {
-                SetProperty(ref destinationStopCode, value);
-            }
-        }
+        public string DestinationStopCode { get; private set; }
 
         protected string destinationStopName = "";
         public string DestinationStopName
@@ -139,17 +97,20 @@ namespace BusGuiding.ViewModels.Driver
                 SetProperty(ref destinationStopName, value);
             }
         }
-        protected string destinationStopSchemaId = "";
-        public string DestinationStopSchemaId
+        protected string DestinationStopSchemaId { get; private set; }
+
+        public List<Dictionary<string, string>> Subroute { get; private set; }
+
+        public void ApplyQueryAttributes(IDictionary<string, string> query)
         {
-            get
-            {
-                return destinationStopSchemaId;
-            }
-            set
-            {
-                SetProperty(ref destinationStopSchemaId, value);
-            }
+            /*string name = HttpUtility.UrlDecode(query["name"]);
+            string location = HttpUtility.UrlDecode(query["location"]);
+            ...     */
+            //TODO asignar todas las propiedades y llamar a init fase 1
+            //TODO serializar subroute como json para pasarlo y recibirlo
+            //TODO hacer P5 un partial, creando una clase para los parámetros
+
+            int a = 4;
         }
 
 
@@ -157,12 +118,38 @@ namespace BusGuiding.ViewModels.Driver
         public P5_RunningViewModel()
         {
             this._messageService = DependencyService.Get<Services.IMessageService>();
-            resetView();
+            dismissRequests();
+            int a = 3;
         }
 
-        public void resetView()
+        protected async void dismissRequests()
         {
-        }        
+            //Stops
+            var taskInvalidateStops = Models.Api.StopRequest.InvalidatePendentRequestsAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""));
+            //Notifications
+            var taskInvalidateNotifications = Models.Api.NotificationTopics.ClearNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""));
+
+            await taskInvalidateStops;
+            await taskInvalidateNotifications;
+        }  
+
+        protected async void initPhase1()
+        {
+            await LoadingPopupPage.ShowLoading();
+            try
+            {
+                
+            }catch(Exception ex)
+            {
+                //TODO mostrar error y echar atrás al cerrarse
+            }
+            finally
+            {
+                await LoadingPopupPage.HideLoadingAsync();
+            }
+        }
+        
+
 
     }
 

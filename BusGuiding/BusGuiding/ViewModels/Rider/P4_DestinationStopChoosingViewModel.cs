@@ -197,7 +197,21 @@ namespace BusGuiding.ViewModels.Driver
                 bool answer = await UserDialogs.Instance.ConfirmAsync($"Do you want to travel from {StopName} to {SelectedStop.Name} by using the line {RouteName}?", "Confirmation");
                 if (answer)
                 {
-                    await Shell.Current.GoToAsync($"p5?origin_stop_code={stopCode}&origin_stop_name={stopName}&origin_stop_schema_id={stopSchemaId}&route_schema_id={RouteSchemaId}&route_name={RouteName}&route_color={RouteColor}&destination_stop_code={SelectedStop.Code}&destination_stop_name={SelectedStop.Name}&destination_stop_schema_id={SelectedStop.SchemaId}");
+                    //Prepare subroute
+                    List<Dictionary<string, string>> subRoute = new List<Dictionary<string, string>>();
+                    foreach(StopTmp stop in Stops)
+                    {
+                        subRoute.Add(new Dictionary<string, string>()
+                        {
+                            { "schema_id", stop.SchemaId },
+                            {"stop_name", stop.Name }
+                        });
+                        if (stop.SchemaId.Equals(SelectedStop.SchemaId))
+                        {
+                            break;
+                        }
+                    }
+                    await Shell.Current.GoToAsync($"p5?origin_stop_code={stopCode}&origin_stop_name={stopName}&origin_stop_schema_id={stopSchemaId}&route_schema_id={RouteSchemaId}&route_name={RouteName}&route_color={RouteColor}&destination_stop_code={SelectedStop.Code}&destination_stop_name={SelectedStop.Name}&destination_stop_schema_id={SelectedStop.SchemaId}&subroute={subRoute}");
                 }
             }
         }
