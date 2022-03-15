@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -211,7 +212,7 @@ namespace BusGuiding.ViewModels.Driver
                             break;
                         }
                     }
-                    await Shell.Current.GoToAsync($"p5?origin_stop_code={stopCode}&origin_stop_name={stopName}&origin_stop_schema_id={stopSchemaId}&route_schema_id={RouteSchemaId}&route_name={RouteName}&route_color={RouteColor}&destination_stop_code={SelectedStop.Code}&destination_stop_name={SelectedStop.Name}&destination_stop_schema_id={SelectedStop.SchemaId}&subroute={subRoute}");
+                    await Shell.Current.GoToAsync($"p5?origin_stop_code={stopCode}&origin_stop_name={stopName}&origin_stop_schema_id={stopSchemaId}&route_schema_id={RouteSchemaId}&route_name={RouteName}&route_color={RouteColor}&destination_stop_code={SelectedStop.Code}&destination_stop_name={SelectedStop.Name}&destination_stop_schema_id={SelectedStop.SchemaId}&subroute={JsonSerializer.Serialize(subRoute)}");
                 }
             }
         }
