@@ -72,8 +72,8 @@ namespace BusGuiding.ViewModels.Driver.P5Running
 
                 //Request in_transit_to and incoming_at for line and origin stop
                 List<string> topics = new List<string>();
-                topics.Add($"line.{RouteSchemaId}.in_transit_to.{OriginStopCode}");
-                topics.Add($"line.{RouteSchemaId}.incoming_at.{OriginStopCode}");
+                topics.Add($"line.{RouteSchemaId}.in_transit_to.{OriginStopSchemaId}");
+                topics.Add($"line.{RouteSchemaId}.incoming_at.{OriginStopSchemaId}");
                 _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
 
                 //Request for the stop at the origin bus stop
@@ -114,6 +114,41 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 //Request in_transit_to to any stop
                 List<string> topics = new List<string>();
                 topics.Add($"vehicle.{vehicleId}.in_transit_to.0");
+                _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
+
+
+            }
+            catch (Exception ex)
+            {
+                //TODO mostrar error y echar atrás al cerrarse
+                UserDialogs.Instance.Alert($"Sorry, a technical error happend during phase {runningPhase}");
+                await Shell.Current.GoToAsync("//rider");
+            }
+        }
+
+        protected async void initPhase21()
+        {
+            try
+            {
+                //Just in case
+                if (runningPhase == 21)
+                {
+                    return;
+                }
+
+                //Set phase
+                runningPhase = 21;
+
+                //Clear any pending request
+                await dismissRequests();
+
+                //Request for the stop at the destination bus stop
+                _ = Models.Api.StopRequest.RequestVehicleStopAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), vehicleId, DestinationStopSchemaId);
+
+                //Request notificiations
+                List<string> topics = new List<string>();
+                topics.Add($"vehicle.{vehicleId}.in_transit_to.0");
+                topics.Add($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
                 _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
 
 
