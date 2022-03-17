@@ -16,6 +16,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
     public partial class P5_RunningViewModel : BaseViewModel
     {
         private readonly Services.IMessageService _messageService;
+        public Command CancelCommand { get; }
         protected string currentStatus = "";
         public string CurrentStatus
         {
@@ -36,6 +37,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
         public P5_RunningViewModel()
         {
             this._messageService = DependencyService.Get<Services.IMessageService>();
+            this.CancelCommand = new Command(OnCancelCommand);
             subscribeToNotificationEvent();
             initShellNavigationEvents();
         }
@@ -45,6 +47,19 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             vehicleId = null;
             runningPhase = 0;
             currentStatus = "";
+        }
+
+        public async void OnCancelCommand()
+        {
+            if(await CancelConfirmationPromptAsync())
+            {
+                await Shell.Current.GoToAsync("..");
+            }
+        }
+
+        public async Task<bool> CancelConfirmationPromptAsync()
+        {
+            return await UserDialogs.Instance.ConfirmAsync("You want to cancel this route?");
         }
 
         protected async Task  dismissRequests()
@@ -149,6 +164,34 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 List<string> topics = new List<string>();
                 topics.Add($"vehicle.{vehicleId}.in_transit_to.0");
                 topics.Add($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
+                _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
+
+
+            }
+            catch (Exception ex)
+            {
+                //TODO mostrar error y echar atrás al cerrarse
+                UserDialogs.Instance.Alert($"Sorry, a technical error happend during phase {runningPhase}");
+                await Shell.Current.GoToAsync("//rider");
+            }
+        }
+
+        protected async void initPhase22()
+        {
+            try
+            {
+                //Just in case
+                if (runningPhase == 22)
+                {
+                    return;
+                }
+
+                //Set phase
+                runningPhase = 22;
+
+                //Request in_transit_to to any stop
+                List<string> topics = new List<string>();
+                topics.Add($"vehicle.{vehicleId}.in_transit_to.0");
                 _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
 
 

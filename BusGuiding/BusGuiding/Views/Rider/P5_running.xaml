@@ -24,7 +24,7 @@
                     </StackLayout>
                 </Frame>
             </StackLayout>
-            <Button Text="Cancel"/>
+            <Button Text="Cancel" Command="{Binding CancelCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

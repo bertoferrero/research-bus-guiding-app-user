@@ -15,6 +15,17 @@ using Xamarin.Forms;
 
 namespace BusGuiding.ViewModels.Driver.P5Running
 {
+    /*
+     Phases: Phase 1 -> waiting for the bus, Phase 2 -> in route
+     
+      Phase 1.1: System is waiting for the notification of in_transint_to o incoming_to from any bus the de origin stop. When it happens, the vehicle id is caught and starts phase 1.2
+      Phase 1.2: System waits for the notification of in_transit_to to a new stop. This means the user is inside and the bus in transit to his destionation, which is the phase 2
+      Phase 2.1 System is waiting to in_transit_to to any stop. This is used for notifying user about the remaining amount of stop until his destionation. 
+                When is received in_transit_to destination, starts phase 2.2
+                Systems also waits for incoming_at signal to destination stop. Once received it, the system properly notifies the user to be ready to soon get off the bus.
+      Phase 2.2: Like Phase 1.2, system waits for the notification of in_transit_to to a new stop. This will mean the user got off the bus so, the guiding can conclude.
+     */
+
     public partial class P5_RunningViewModel
     {
         
@@ -43,6 +54,9 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                     break;
                 case 21:
                     Phase21NotificationHandler(e);
+                    break;
+                case 22:
+                    Phase22NotificationHandler(e);
                     break;
 
             }
@@ -102,8 +116,27 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 if(remainingStops == 0)
                 {
                     easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.in_transit_to.0");
-                    //TODO init phase22
+                    //init phase22
+                    initPhase22();
                 }
+            }
+            else if (e["status"].ToUpper().Equals("INCOMING_AT"))
+            {
+                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
+                sendPhase2Incoming();
+                //init phase22
+                initPhase22();
+            }
+        }
+        private void Phase22NotificationHandler(IDictionary<string, string> e)
+        {
+            if (e["status"].ToUpper().Equals("IN_TRANSIT_TO")) { 
+
+                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.in_transit_to.0");
+                //show finish popup
+                UserDialogs.Instance.Alert($"You arrived at destination! Thanks for using BusGuiding App.");
+                //Move to root p2 page
+                Shell.Current.GoToAsync("//rider");
             }
             else if (e["status"].ToUpper().Equals("INCOMING_AT"))
             {
@@ -130,7 +163,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             {
                 //Middle stop
                 var stopsPlural = (remainingStopsAmount > 1 ? "stops" : "stop");
-                CurrentStatus = $"In route. {remainingStopsAmount} {stopsPlural} before until destination. Next stop is {nextStopName}";
+                CurrentStatus = $"In route. {remainingStopsAmount} {stopsPlural} remaining. Next stop is {nextStopName}";
             }
             else
             {
