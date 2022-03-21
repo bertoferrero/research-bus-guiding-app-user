@@ -88,6 +88,15 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Geolocalise.
+        /// </summary>
+        internal static string Geolocalise {
+            get {
+                return ResourceManager.GetString("Geolocalise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Loading.
         /// </summary>
         internal static string Loading {
@@ -111,6 +120,15 @@ namespace BusGuiding.Resources {
         internal static string LoginError {
             get {
                 return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a OK.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         

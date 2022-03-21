@@ -67,7 +67,7 @@ namespace BusGuiding.ViewModels.Driver
             {
                 if(ex.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, "Stop not found.", Resources.GeneralTexts.Close);
+                    await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.RiderTexts.StopNotFoundError, Resources.GeneralTexts.Close);
                 }
                 else
                 {
@@ -88,7 +88,7 @@ namespace BusGuiding.ViewModels.Driver
             var location = await Geolocation.GetLocationAsync(request);
             if (location == null)
             {
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, "Geolocation data cannot be got. Please try again.", Resources.GeneralTexts.Close);
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.RiderTexts.GeolocationError, Resources.GeneralTexts.Close);
                 return;
 
             }

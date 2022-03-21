@@ -2,24 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BusGuiding.Views.Rider.P5_running"
+             xmlns:resources="clr-namespace:BusGuiding.Resources"
              Title="In route">
     <ContentPage.Content>
         <StackLayout Margin="10">
             <StackLayout VerticalOptions="FillAndExpand">
                 <Frame BorderColor="Gray" CornerRadius="10">
                     <StackLayout>
-                        <Label Text="Route status" FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Text="{x:Static resources:RiderTexts.P5-RouteStatusLabel}" FontSize="Medium" FontAttributes="Bold"/>
                         <Label Text="{Binding CurrentStatus}" Padding="10,10,0,0"/>
                     </StackLayout>
                 </Frame>
                 <Frame BorderColor="Gray" CornerRadius="10">
                     <StackLayout>
-                        <Label Text="Route summary" FontSize="Medium" FontAttributes="Bold"/>
-                        <Label Text="Traveling from:" Padding="10,10,0,0" FontAttributes="Bold"/>
+                        <Label Text="{x:Static resources:RiderTexts.P5_RouteSummaryLabel}" FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Text="{x:Static resources:RiderTexts.P5_TravellingFromLabel}" Padding="10,10,0,0" FontAttributes="Bold"/>
                         <Label Text="{Binding OriginStopName}" Padding="15,0,0,10" />
-                        <Label Text="To:" Padding="10,10,0,0" FontAttributes="Bold"/>
+                        <Label Text="{x:Static resources:RiderTexts.P5_ToLabel}" Padding="10,10,0,0" FontAttributes="Bold"/>
                         <Label Text="{Binding DestinationStopName}" Padding="15,0,0,10" />
-                        <Label Text="By line:" Padding="10,10,0,0" FontAttributes="Bold"/>
+                        <Label Text="{x:Static resources:RiderTexts.P5_ByLineLabel}" Padding="10,10,0,0" FontAttributes="Bold"/>
                         <Label Text="{Binding RouteName}" Padding="15,0,0,10" />
                     </StackLayout>
                 </Frame>

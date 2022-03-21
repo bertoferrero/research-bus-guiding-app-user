@@ -121,7 +121,7 @@ namespace BusGuiding.ViewModels.Driver
             }
             catch (Exception ex)
             {
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, "Routes cannot be got, please, check your internet connection.", Resources.GeneralTexts.Close);
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.RiderTexts.RoutesGettingError, Resources.GeneralTexts.Close);
                 await Shell.Current.GoToAsync("..");
                 return;
             }

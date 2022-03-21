@@ -181,7 +181,7 @@ namespace BusGuiding.ViewModels.Driver
             }
             catch (Exception ex)
             {
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, "Routes cannot be got, please, check your internet connection.", Resources.GeneralTexts.Close);
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.RiderTexts.RoutesGettingError, Resources.GeneralTexts.Close);
                 await Shell.Current.GoToAsync("..");
                 return;
             }
@@ -195,7 +195,7 @@ namespace BusGuiding.ViewModels.Driver
         {
             if (SelectedStop != null)
             {
-                bool answer = await UserDialogs.Instance.ConfirmAsync($"Do you want to travel from {StopName} to {SelectedStop.Name} by using the line {RouteName}?", "Confirmation");
+                bool answer = await UserDialogs.Instance.ConfirmAsync(string.Format(Resources.RiderTexts.P4_TravelConfirmPrompt, StopName, SelectedStop.Name, RouteName));
                 if (answer)
                 {
                     //Prepare subroute

@@ -31,6 +31,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>GeneralTexts.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\RiderTexts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RiderTexts.resx</DependentUpon>
+    </Compile>
     <Compile Update="Views\Dev\Test2_2__RiderDemoTestPage.xaml.cs">
       <DependentUpon>Test2_2__RiderDemoTestPage.xaml</DependentUpon>
     </Compile>
@@ -68,6 +73,10 @@
     <EmbeddedResource Update="Resources\GeneralTexts.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>GeneralTexts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\RiderTexts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RiderTexts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Driver\DriverPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

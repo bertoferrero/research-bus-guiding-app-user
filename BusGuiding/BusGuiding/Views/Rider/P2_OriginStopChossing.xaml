@@ -2,18 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BusGuiding.Views.Rider.P2_OriginStopChossing"
-             Title="Origin stop"
+             xmlns:resources="clr-namespace:BusGuiding.Resources"
+             Title="{x:Static resources:RiderTexts.P2_Title}"
              >
     <ContentPage.Content>
         <StackLayout Margin="10"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="FillAndExpand">
-            <Label Text="Please, enter the origin stop code or tap the 'Geolocalise' button."/>
+            <Label Text="{x:Static resources:RiderTexts.P2_EnterOriginStopLabel}"/>
             <StackLayout Orientation="Horizontal">
                 <Entry HorizontalOptions="FillAndExpand" Text="{Binding StopCodeId}"/>
-                <Button Text="OK" Command="{Binding ReadFromStopCodeFieldCommand}"/>
+                <Button Text="{x:Static resources:GeneralTexts.OK}" Command="{Binding ReadFromStopCodeFieldCommand}"/>
             </StackLayout>
-            <Button Text="Geolocalise" Command="{Binding GeolocaliseCommand}"/>
+            <Button Text="{x:Static resources:GeneralTexts.Geolocalise}" Command="{Binding GeolocaliseCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
