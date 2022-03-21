@@ -162,8 +162,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             if(remainingStopsAmount > 0)
             {
                 //Middle stop
-                var stopsPlural = (remainingStopsAmount > 1 ? "stops" : "stop");
-                CurrentStatus = $"In route. {remainingStopsAmount} {stopsPlural} remaining. Next stop is {nextStopName}";
+                CurrentStatus = $"In route. {remainingStopsAmount+1} stops remaining. Next stop is {nextStopName}";
             }
             else
             {
