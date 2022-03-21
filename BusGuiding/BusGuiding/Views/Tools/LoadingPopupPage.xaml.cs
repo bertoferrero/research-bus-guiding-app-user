@@ -27,7 +27,7 @@ namespace BusGuiding.Views.Tools
         public static async Task ShowLoading()
         {
             //TODO this is a patch, this line must to be moved out from this class
-            UserDialogs.Instance.ShowLoading("Loading, one moment please.");
+            UserDialogs.Instance.ShowLoading(BusGuiding.Resources.GeneralTexts.Loading);
             //await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new LoadingPopupPage());
         }
 

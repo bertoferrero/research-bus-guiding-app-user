@@ -68,12 +68,12 @@ namespace BusGuiding.ViewModels.Driver
             var vehicleId = VehicleID.Trim();
             if (String.IsNullOrEmpty(vehicleId))
             {
-                await this._messageService.DisplayAlert("Error", "Vehicle id field cannot be empty", "Close");
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.DriverTexts.ErrorVehicleIdEmpty, Resources.GeneralTexts.Close);
                 return;
             }
             if(routes.Count < RouteListSelectedIndex)
             {
-                await this._messageService.DisplayAlert("Error", "Error locating the route", "Close");
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.DriverTexts.ErrorLocatingRoute, Resources.GeneralTexts.Close);
                 return;
             }
             var routeData = routes[RouteListSelectedIndex];
@@ -88,7 +88,7 @@ namespace BusGuiding.ViewModels.Driver
             }
             catch (Exception ex)
             {
-                await this._messageService.DisplayAlert("Error", "Connexion error.", "Close");
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
                 await LoadingPopupPage.HideLoadingAsync();
                 return;
             }
@@ -99,70 +99,6 @@ namespace BusGuiding.ViewModels.Driver
             IsRunning = true;
         }
 
-        /*public async void CheckLoggedUser()
-        {
-            string userApiToken = Preferences.Get(Constants.PreferenceKeys.UserApiToken, "");
-            if (!string.IsNullOrEmpty(userApiToken))
-            {
-                await LoadingPopupPage.ShowLoading();
-                //Si hay token, comprobamos si es valido, de ser asi enviamos a la pagina principal. Si no, lo borramos
-                try
-                {
-                    //Try to update the device notification token on the same request
-                    string currentNotificationToken = await NotificationHandler.Instance.GetTokenAsync();
-                    //await Models.Api.User.GetUserAsync(userApiToken);
-                    await Models.Api.User.UpdateNotificationTokenAsync(userApiToken, currentNotificationToken);
-                    //Cargamos la pagina principal
-                    await LoadingPopupPage.HideLoadingAsync();
-                    (App.Current.MainPage as AppShell).SetLoggedUserContextAsync();
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    await LoadingPopupPage.HideLoadingAsync();
-                    Preferences.Remove(Constants.PreferenceKeys.UserApiToken);
-                }
-            }
-            ShowForm = true;
-        }*/
-
-        /*private async void OnLoginClicked(object obj)
-        {
-
-            string cleanUsername = username.Trim();
-            string cleanPassword = password.Trim();
-            if (string.IsNullOrEmpty(cleanUsername) || string.IsNullOrEmpty(cleanPassword))
-            {
-                return;
-            }
-            try
-            {
-                await LoadingPopupPage.ShowLoading();
-                var loginResponse = await Models.Api.User.LoginAsync(cleanUsername, cleanPassword);
-                //Store the token
-                Preferences.Set(Constants.PreferenceKeys.UserApiToken, loginResponse["token"]);
-                //Store the role
-                Preferences.Set(Constants.PreferenceKeys.UserRole, loginResponse["role"]);
-                //Send current notification token
-                string currentNotificationToken = await NotificationHandler.Instance.GetTokenAsync();
-                await Models.Api.User.UpdateNotificationTokenAsync(loginResponse["token"], currentNotificationToken);
-                //Load the page
-                await LoadingPopupPage.HideLoadingAsync();
-                (App.Current.MainPage as AppShell).SetLoggedUserContextAsync();
-            }
-            catch(ConnectionException ex)
-            {
-                //TODO Connection error
-                await LoadingPopupPage.HideLoadingAsync();
-                await this._messageService.DisplayAlert("Error", "Connexion error.", "Close");
-            }
-            catch(StatusCodeException ex)
-            {
-                //Login error
-                await LoadingPopupPage.HideLoadingAsync();
-                await this._messageService.DisplayAlert("Login error", "Something is wrong in your data.", "Close");
-            }
-            //IsBusy = false;
-        }*/
+        
     }
 }

@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BusGuiding.Views.Driver.DriverPage">
+             x:Class="BusGuiding.Views.Driver.DriverPage"           
+             xmlns:resources="clr-namespace:BusGuiding.Resources"
+             Title="{Binding ViewTitle}">
     <ContentPage.Content>
         <StackLayout Margin="10"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="FillAndExpand">
             <StackLayout IsVisible="{Binding ShowChoosingRouteForm}">
-                <Label Text="Route"/>
+                <Label Text="{x:Static resources:DriverTexts.PleaseSelectRoute}"/>
+                <Label Text="{x:Static resources:GeneralTexts.Route}"/>
                 <Picker Title="" ItemsSource="{Binding RouteList}" SelectedIndex="{Binding RouteListSelectedIndex}"/>
-                <Label Text="Vehicle ID"/>
-                <Entry Placeholder="Vehicle ID" Text="{Binding VehicleID}"/>
-                <Button Text="Start" Command="{Binding StartCommand}"/>
+                <Label Text="{x:Static resources:GeneralTexts.Vehicleid}"/>
+                <Entry Placeholder="{x:Static resources:GeneralTexts.Vehicleid}" Text="{Binding VehicleID}"/>
+                <Button Text="{x:Static resources:GeneralTexts.Start}" Command="{Binding StartCommand}"/>
             </StackLayout>
 
             <Grid IsVisible="{Binding ShowRunningForm}" VerticalOptions="FillAndExpand">
@@ -20,13 +23,13 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <StackLayout VerticalOptions="FillAndExpand" Grid.Row="0">
-                <Label Text="System is now running. You can turn off this device screen, the application will turn it on."/>
+                    <Label Text="{x:Static resources:DriverTexts.SystemRunningAdvice}"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
-                    <Label Text="Send GPS data" VerticalOptions="Center"/>
-                        <Switch IsToggled="{Binding SendGpsSwitchToggle}}" VerticalOptions="Center"/>
+                        <Label Text="{x:Static resources:DriverTexts.SendGPSOption}" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding SendGpsSwitchToggle}" VerticalOptions="Center"/>
                 </StackLayout>
                 </StackLayout>
-                <Button Text="Finish" Command="{Binding FinishCommand}" VerticalOptions="EndAndExpand" Grid.Row="1"/>
+                <Button Text="{x:Static resources:DriverTexts.Finish}" Command="{Binding FinishCommand}" VerticalOptions="EndAndExpand" Grid.Row="1"/>
             </Grid>
             <!--
             <StackLayout IsVisible="{Binding ShowRunningForm}" HorizontalOptions="Center">

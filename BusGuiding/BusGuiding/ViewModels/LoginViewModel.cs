@@ -99,13 +99,13 @@ namespace BusGuiding.ViewModels
             {
                 //TODO Connection error
                 await LoadingPopupPage.HideLoadingAsync();
-                await this._messageService.DisplayAlert("Error", "Connexion error.", "Close");
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
             }
             catch(StatusCodeException ex)
             {
                 //Login error
                 await LoadingPopupPage.HideLoadingAsync();
-                await this._messageService.DisplayAlert("Login error", "Something is wrong in your data.", "Close");
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.LoginError, Resources.GeneralTexts.Close);
             }
             //IsBusy = false;
         }

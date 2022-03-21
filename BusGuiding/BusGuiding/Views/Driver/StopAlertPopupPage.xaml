@@ -4,8 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-             x:Class="BusGuiding.Views.Driver.StopAlertPopupPage"
-        Padding="20, 20, 20, 20" BackgroundColor="IndianRed">
+             x:Class="BusGuiding.Views.Driver.StopAlertPopupPage" 
+             xmlns:resources="clr-namespace:BusGuiding.Resources"
+        Padding="20, 20, 20, 20" BackgroundColor="IndianRed"
+    CloseWhenBackgroundIsClicked="False">
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation 
             PositionIn="Center"
@@ -23,12 +25,12 @@
         HorizontalOptions="Center" 
         Padding="20, 20, 20, 20">
         <Label
-            Text="STOP REQUESTED" TextColor="White" FontSize="Title" HorizontalTextAlignment="Center"/>
+            Text="{x:Static resources:DriverTexts.StopRequestedLabel}" TextColor="White" FontSize="Title" HorizontalTextAlignment="Center"/>
         <Label
-            Text="for stop id:" TextColor="White"  HorizontalTextAlignment="Center"/>
+            Text="{x:Static resources:DriverTexts.ForStopIdLabel}" TextColor="White"  HorizontalTextAlignment="Center"/>
         <Label
             Text="" x:Name="StopIdLabel" TextColor="White" FontSize="150" HorizontalTextAlignment="Center"/>
-        <Label Text="This message will be closed automatically. Even tough you can close it by tapping the next button." TextColor="White" HorizontalTextAlignment="Center"/>
-        <Button Text="Close" x:Name="CloseButton" Clicked="CloseButton_Clicked"/>
+        <Label Text="{x:Static resources:DriverTexts.PopUpAutomaticallyClose}" TextColor="White" HorizontalTextAlignment="Center"/>
+        <Button Text="{x:Static resources:GeneralTexts.Close}" x:Name="CloseButton" Clicked="CloseButton_Clicked"/>
     </StackLayout>
 </pages:PopupPage>

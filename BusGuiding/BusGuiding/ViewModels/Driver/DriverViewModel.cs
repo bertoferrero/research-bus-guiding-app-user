@@ -1,4 +1,5 @@
 ﻿using BusGuiding.Models.Api.Exceptions;
+using BusGuiding.Resources;
 using BusGuiding.Views.Tools;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,19 @@ namespace BusGuiding.ViewModels.Driver
                 SetProperty(ref showChoosingRouteForm, value);
                 ShowChoosingRouteForm = !value;
                 ShowRunningForm = value;
+                ViewTitle = value ? DriverTexts.TitleRunningView : DriverTexts.TitleChoosingView;
+            }
+        }
+
+        private string viewTitle = DriverTexts.TitleChoosingView;
+        public string ViewTitle
+        {
+            get
+            {
+                return viewTitle;
+            }
+            set{
+                SetProperty(ref viewTitle, value);
             }
         }
 

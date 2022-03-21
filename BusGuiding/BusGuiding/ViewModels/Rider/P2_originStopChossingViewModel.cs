@@ -60,18 +60,18 @@ namespace BusGuiding.ViewModels.Driver
             }
             catch (ConnectionException ex)
             {
-                await this._messageService.DisplayAlert("Error", "Connexion error.", "Close");
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
                 return;
             }
             catch (StatusCodeException ex)
             {
                 if(ex.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    await this._messageService.DisplayAlert("Error", "Stop not found.", "Close");
+                    await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, "Stop not found.", Resources.GeneralTexts.Close);
                 }
                 else
                 {
-                    await this._messageService.DisplayAlert("Error", "Connexion error.", "Close");
+                    await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
                 }
             }
             finally
@@ -88,7 +88,7 @@ namespace BusGuiding.ViewModels.Driver
             var location = await Geolocation.GetLocationAsync(request);
             if (location == null)
             {
-                await this._messageService.DisplayAlert("Error", "Geolocation data cannot be got. Please try again.", "Close");
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, "Geolocation data cannot be got. Please try again.", Resources.GeneralTexts.Close);
                 return;
 
             }
@@ -103,7 +103,7 @@ namespace BusGuiding.ViewModels.Driver
             }
             catch (Exception ex)
             {
-                await this._messageService.DisplayAlert("Error", "Connexion error.", "Close");
+                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
                 return;
             }
             finally

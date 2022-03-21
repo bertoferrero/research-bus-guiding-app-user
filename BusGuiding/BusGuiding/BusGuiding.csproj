@@ -21,6 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\DriverTexts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DriverTexts.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\GeneralTexts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralTexts.resx</DependentUpon>
+    </Compile>
     <Compile Update="Views\Dev\Test2_2__RiderDemoTestPage.xaml.cs">
       <DependentUpon>Test2_2__RiderDemoTestPage.xaml</DependentUpon>
     </Compile>
@@ -50,6 +60,14 @@
   <ItemGroup>
     <EmbeddedResource Update="AppShell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\DriverTexts.resx">
+      <LastGenOutput>DriverTexts.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\GeneralTexts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralTexts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Driver\DriverPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
