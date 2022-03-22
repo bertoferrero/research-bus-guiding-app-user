@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BusGuiding.Views.Rider.P5_running"
              xmlns:resources="clr-namespace:BusGuiding.Resources"
-             Title="In route">
+             Title="{x:Static resources:RiderTexts.P5_Title}">
     <ContentPage.Content>
         <StackLayout Margin="10">
             <StackLayout VerticalOptions="FillAndExpand">
                 <Frame BorderColor="Gray" CornerRadius="10">
                     <StackLayout>
-                        <Label Text="{x:Static resources:RiderTexts.P5-RouteStatusLabel}" FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Text="{x:Static resources:RiderTexts.P5_RouteStatusLabel}" FontSize="Medium" FontAttributes="Bold"/>
                         <Label Text="{Binding CurrentStatus}" Padding="10,10,0,0"/>
                     </StackLayout>
                 </Frame>
@@ -25,7 +25,7 @@
                     </StackLayout>
                 </Frame>
             </StackLayout>
-            <Button Text="Cancel" Command="{Binding CancelCommand}"/>
+            <Button Text="{x:Static resources:GeneralTexts.Cancel}" Command="{Binding CancelCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

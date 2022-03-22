@@ -118,99 +118,99 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ArrivedAtDestinationAlert" xml:space="preserve">
-    <value>You arrived at destination! Thanks for using BusGuiding App.</value>
+    <value>¡Has llegado a destino! Gracias por usar BusGuiding.</value>
   </data>
   <data name="CancelGuidingConfirmation" xml:space="preserve">
-    <value>Do you want to cancel this route?</value>
+    <value>¿Quieres cancelar esta ruta?</value>
   </data>
   <data name="ErrorMessagePhase" xml:space="preserve">
-    <value>Sorry, a technical error happend during phase {0}</value>
+    <value>Lo sentimos, ha ocurrido un error técnico durante la fase {0}</value>
   </data>
   <data name="GeolocationError" xml:space="preserve">
-    <value>Geolocation data cannot be got. Please try again.</value>
+    <value>No se ha podido geolocalizar. Por favor, prueba otra vez.</value>
   </data>
   <data name="NotificationPh1Incoming" xml:space="preserve">
-    <value>Your bus is incoming at the origin stop, be prepared to get on.</value>
+    <value>Tu autobús está llegando a la parada de origen, prepárate para subir.</value>
   </data>
   <data name="NotificationPh1InTransit" xml:space="preserve">
-    <value>A bus for you has been located, it is now in transit to the origin stop.</value>
+    <value>Autobús localizado, se encuentra dirigiendose a la parada de origen.</value>
   </data>
   <data name="NotificationPh2IncomingDestination" xml:space="preserve">
-    <value>Your bus is about to arrive at destination, be prepared to get off.</value>
+    <value>Tu autobús está llegando a la parada final, prepárate para bajar.</value>
   </data>
   <data name="NotificationPh2IntransitDestination" xml:space="preserve">
-    <value>Your bus is now in transit to destination, be prepared to get off.</value>
+    <value>Tu autobús está de camino a la parada final, prepárate para bajar.</value>
   </data>
   <data name="NotificationTitleRouteUpdate" xml:space="preserve">
-    <value>Route update</value>
+    <value>Actualización de ruta</value>
   </data>
   <data name="P2-EnterOriginStopLabel" xml:space="preserve">
-    <value>Please, enter the origin stop code or tap the 'Geolocalise' button.</value>
+    <value>Por favor, introduce el código de la parada origen o pulsa en geolocalizar.</value>
   </data>
   <data name="P2-Title" xml:space="preserve">
-    <value>Origin stop</value>
+    <value>Parada de origen</value>
   </data>
   <data name="P3-SelectRoute" xml:space="preserve">
-    <value>Please, select the line you want to get on.</value>
+    <value>Por favor, selecciona la línea que quieres coger.</value>
   </data>
   <data name="P3-Title" xml:space="preserve">
-    <value>Line selection</value>
+    <value>Selección de línea</value>
   </data>
   <data name="P4-SelectDestinationStop" xml:space="preserve">
-    <value>Please, select the destination stop where you want to get off.</value>
+    <value>Por favor, selecciona la parada donde deseas bajarte.</value>
   </data>
   <data name="P4-Title" xml:space="preserve">
-    <value>Destination stop</value>
+    <value>Parada final</value>
   </data>
   <data name="P4-TravelConfirmPrompt" xml:space="preserve">
-    <value>Do you want to travel from {0} to {1} by using the line {2}?</value>
+    <value>¿Confirmas que quieres viajar de {0} a {1} usando la línea {2}?</value>
   </data>
   <data name="P5-ByLineLabel" xml:space="preserve">
-    <value>By line:</value>
+    <value>Con la línea:</value>
   </data>
   <data name="P5-RouteStatusLabel" xml:space="preserve">
-    <value>Route status</value>
+    <value>Estado de la ruta</value>
   </data>
   <data name="P5-RouteSummaryLabel" xml:space="preserve">
-    <value>Route summary</value>
+    <value>Resumen de la ruta</value>
   </data>
   <data name="P5-Title" xml:space="preserve">
-    <value>In route</value>
+    <value>En ruta</value>
   </data>
   <data name="P5-ToLabel" xml:space="preserve">
-    <value>To:</value>
+    <value>A:</value>
   </data>
   <data name="P5-TravellingFromLabel" xml:space="preserve">
-    <value>Travelling from:</value>
+    <value>Viajando desde:</value>
   </data>
   <data name="RoutesGettingError" xml:space="preserve">
-    <value>Routes cannot be got, please, check your internet connection</value>
+    <value>Las líneas no se han podido descargar, por favor, comprueba tu conexión.</value>
   </data>
   <data name="StatusPh1Incoming" xml:space="preserve">
-    <value>Bus is about to arrive at the origin stop.</value>
+    <value>Autobús llegando a la parada de origen.</value>
   </data>
   <data name="StatusPh1InTransit" xml:space="preserve">
-    <value>Bus in transit to the origin stop.</value>
+    <value>Autobús de camino a la parada de origen.</value>
   </data>
   <data name="StatusPh2IncomingDestination" xml:space="preserve">
-    <value>Arriving at destination stop</value>
+    <value>Llegando a la parada final.</value>
   </data>
   <data name="StatusPh2IntransitDestination" xml:space="preserve">
-    <value>In transit to destination stop.</value>
+    <value>De camino a la parada final.</value>
   </data>
   <data name="StatusPh2RemainingStops" xml:space="preserve">
-    <value>In route. {0} stops remaining. Next stop is {1}</value>
+    <value>En ruta. Quedan {0} paradas. La siguiente parada es {1}</value>
   </data>
   <data name="StatusWaitingIncomingBus" xml:space="preserve">
-    <value>Waiting for an incoming bus</value>
+    <value>Esperando autobús.</value>
   </data>
   <data name="StopNotFoundError" xml:space="preserve">
-    <value>Stop not found</value>
+    <value>Parada no encontrada</value>
   </data>
   <data name="SummaryLine" xml:space="preserve">
-    <value>Line:</value>
+    <value>Linea:</value>
   </data>
   <data name="SummaryOriginStop" xml:space="preserve">
-    <value>Origin stop:</value>
+    <value>Parada de origen:</value>
   </data>
 </root>

@@ -93,6 +93,7 @@ namespace BusGuiding.Droid.DependencyService
                 .SetContentIntent(pendingIntent)
                 .SetContentTitle(title)
                 .SetContentText(message)
+                .SetStyle(new Notification.BigTextStyle().BigText(message))
                 //.SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.xamagonBlue))
                 .SetSmallIcon(Resource.Mipmap.icon);
                 //.SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);

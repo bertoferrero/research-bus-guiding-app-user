@@ -61,11 +61,83 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a You arrived at destination! Thanks for using BusGuiding App..
+        /// </summary>
+        internal static string ArrivedAtDestinationAlert {
+            get {
+                return ResourceManager.GetString("ArrivedAtDestinationAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to cancel this route?.
+        /// </summary>
+        internal static string CancelGuidingConfirmation {
+            get {
+                return ResourceManager.GetString("CancelGuidingConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sorry, a technical error happend during phase {0}.
+        /// </summary>
+        internal static string ErrorMessagePhase {
+            get {
+                return ResourceManager.GetString("ErrorMessagePhase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Geolocation data cannot be got. Please try again..
         /// </summary>
         internal static string GeolocationError {
             get {
                 return ResourceManager.GetString("GeolocationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your bus is incoming at the origin stop, be prepared to get on..
+        /// </summary>
+        internal static string NotificationPh1Incoming {
+            get {
+                return ResourceManager.GetString("NotificationPh1Incoming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a A bus for you has been located, it is now in transit to the origin stop..
+        /// </summary>
+        internal static string NotificationPh1InTransit {
+            get {
+                return ResourceManager.GetString("NotificationPh1InTransit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your bus is about to arrive at destination, be prepared to get off..
+        /// </summary>
+        internal static string NotificationPh2IncomingDestination {
+            get {
+                return ResourceManager.GetString("NotificationPh2IncomingDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your bus is now in transit to destination, be prepared to get off..
+        /// </summary>
+        internal static string NotificationPh2IntransitDestination {
+            get {
+                return ResourceManager.GetString("NotificationPh2IntransitDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Route update.
+        /// </summary>
+        internal static string NotificationTitleRouteUpdate {
+            get {
+                return ResourceManager.GetString("NotificationTitleRouteUpdate", resourceCulture);
             }
         }
         
@@ -160,6 +232,15 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a In route.
+        /// </summary>
+        internal static string P5_Title {
+            get {
+                return ResourceManager.GetString("P5-Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a To:.
         /// </summary>
         internal static string P5_ToLabel {
@@ -169,7 +250,7 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Travelling from.
+        ///   Busca una cadena traducida similar a Travelling from:.
         /// </summary>
         internal static string P5_TravellingFromLabel {
             get {
@@ -183,6 +264,60 @@ namespace BusGuiding.Resources {
         internal static string RoutesGettingError {
             get {
                 return ResourceManager.GetString("RoutesGettingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Bus is about to arrive at the origin stop..
+        /// </summary>
+        internal static string StatusPh1Incoming {
+            get {
+                return ResourceManager.GetString("StatusPh1Incoming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Bus in transit to the origin stop..
+        /// </summary>
+        internal static string StatusPh1InTransit {
+            get {
+                return ResourceManager.GetString("StatusPh1InTransit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Arriving at destination stop.
+        /// </summary>
+        internal static string StatusPh2IncomingDestination {
+            get {
+                return ResourceManager.GetString("StatusPh2IncomingDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a In transit to destination stop..
+        /// </summary>
+        internal static string StatusPh2IntransitDestination {
+            get {
+                return ResourceManager.GetString("StatusPh2IntransitDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a In route. {0} stops remaining. Next stop is {1}.
+        /// </summary>
+        internal static string StatusPh2RemainingStops {
+            get {
+                return ResourceManager.GetString("StatusPh2RemainingStops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Waiting for an incoming bus.
+        /// </summary>
+        internal static string StatusWaitingIncomingBus {
+            get {
+                return ResourceManager.GetString("StatusWaitingIncomingBus", resourceCulture);
             }
         }
         

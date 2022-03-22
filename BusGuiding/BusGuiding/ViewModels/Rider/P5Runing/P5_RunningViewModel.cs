@@ -59,7 +59,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
 
         public async Task<bool> CancelConfirmationPromptAsync()
         {
-            return await UserDialogs.Instance.ConfirmAsync("You want to cancel this route?");
+            return await UserDialogs.Instance.ConfirmAsync(Resources.RiderTexts.CancelGuidingConfirmation);
         }
 
         protected async Task  dismissRequests()
@@ -95,13 +95,13 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 _ = Models.Api.StopRequest.RequestRouteStopAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), RouteSchemaId, OriginStopSchemaId);
 
                 //Set status message
-                CurrentStatus = "Waiting for an incoming bus";
+                CurrentStatus = Resources.RiderTexts.StatusWaitingIncomingBus;
 
             }
             catch (Exception ex)
             {
                 //TODO mostrar error y echar atrás al cerrarse
-                UserDialogs.Instance.Alert($"Sorry, a technical error happend during phase {runningPhase}");
+                UserDialogs.Instance.Alert(string.Format(Resources.RiderTexts.ErrorMessagePhase, runningPhase));
                 await Shell.Current.GoToAsync("//rider");
             }
             finally
@@ -136,7 +136,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             catch (Exception ex)
             {
                 //TODO mostrar error y echar atrás al cerrarse
-                UserDialogs.Instance.Alert($"Sorry, a technical error happend during phase {runningPhase}");
+                UserDialogs.Instance.Alert(string.Format(Resources.RiderTexts.ErrorMessagePhase, runningPhase));
                 await Shell.Current.GoToAsync("//rider");
             }
         }
@@ -164,6 +164,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 List<string> topics = new List<string>();
                 topics.Add($"vehicle.{vehicleId}.in_transit_to.0");
                 topics.Add($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
+                topics.Add($"vehicle.{vehicleId}.stopped_at.{DestinationStopSchemaId}");
                 _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
 
 
@@ -171,7 +172,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             catch (Exception ex)
             {
                 //TODO mostrar error y echar atrás al cerrarse
-                UserDialogs.Instance.Alert($"Sorry, a technical error happend during phase {runningPhase}");
+                UserDialogs.Instance.Alert(string.Format(Resources.RiderTexts.ErrorMessagePhase, runningPhase));
                 await Shell.Current.GoToAsync("//rider");
             }
         }
@@ -199,7 +200,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             catch (Exception ex)
             {
                 //TODO mostrar error y echar atrás al cerrarse
-                UserDialogs.Instance.Alert($"Sorry, a technical error happend during phase {runningPhase}");
+                UserDialogs.Instance.Alert(string.Format(Resources.RiderTexts.ErrorMessagePhase, runningPhase));
                 await Shell.Current.GoToAsync("//rider");
             }
         }

@@ -120,9 +120,10 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                     initPhase22();
                 }
             }
-            else if (e["status"].ToUpper().Equals("INCOMING_AT"))
+            else if (e["status"].ToUpper().Equals("INCOMING_AT") || e["status"].ToUpper().Equals("STOPPED_AT"))
             {
                 easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
+                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.stopped_at.{DestinationStopSchemaId}");
                 sendPhase2Incoming();
                 //init phase22
                 initPhase22();
@@ -134,13 +135,14 @@ namespace BusGuiding.ViewModels.Driver.P5Running
 
                 easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.in_transit_to.0");
                 //show finish popup
-                UserDialogs.Instance.Alert($"You arrived at destination! Thanks for using BusGuiding App.");
+                UserDialogs.Instance.Alert(Resources.RiderTexts.ArrivedAtDestinationAlert);
                 //Move to root p2 page
                 Shell.Current.GoToAsync("//rider");
             }
-            else if (e["status"].ToUpper().Equals("INCOMING_AT"))
+            else if (e["status"].ToUpper().Equals("INCOMING_AT") || e["status"].ToUpper().Equals("STOPPED_AT"))
             {
                 easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
+                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.stopped_at.{DestinationStopSchemaId}");
                 sendPhase2Incoming();
             }
         }
@@ -148,13 +150,13 @@ namespace BusGuiding.ViewModels.Driver.P5Running
         //Messages To User
         private void sendPhase1InTransitToMessages()
         {
-            CurrentStatus = "Bus in transit to the origin stop.";
-            NotificationHandler.Instance.ShowNotification("Route update", "A bus for you has been located, it is now in transit to the origin stop.");
+            CurrentStatus = Resources.RiderTexts.StatusPh1InTransit;
+            NotificationHandler.Instance.ShowNotification(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh1InTransit);
         }
         private void sendPhase1IncomingAtMessages()
         {
-            CurrentStatus = "Bus is about to arrive at the origin stop.";
-            NotificationHandler.Instance.ShowNotification("Route update", "Your bus is incoming at the origin stop, be prepared.");
+            CurrentStatus = Resources.RiderTexts.StatusPh1Incoming;
+            NotificationHandler.Instance.ShowNotification(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh1Incoming);
         }
 
         private void sendPhase2RemainingStopsMessages(string nextStopName, int remainingStopsAmount)
@@ -162,20 +164,20 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             if(remainingStopsAmount > 0)
             {
                 //Middle stop
-                CurrentStatus = $"In route. {remainingStopsAmount+1} stops remaining. Next stop is {nextStopName}";
+                CurrentStatus = string.Format(Resources.RiderTexts.StatusPh2RemainingStops, remainingStopsAmount + 1, nextStopName);
             }
             else
             {
                 //Final stop
-                CurrentStatus = $"In transit to destination stop.";
-                NotificationHandler.Instance.ShowNotification("Route update", "Your bus is now in transit to destination, be prepared to get off.");
+                CurrentStatus = Resources.RiderTexts.StatusPh2IntransitDestination;
+                NotificationHandler.Instance.ShowNotification(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh2IntransitDestination);
             }
         }
 
         private void sendPhase2Incoming()
         {
-            CurrentStatus = $"Arriving at destination stop.";
-            NotificationHandler.Instance.ShowNotification("Route update", "Your bus is about to arrive at destination, be prepared to get off.");
+            CurrentStatus = Resources.RiderTexts.StatusPh2IncomingDestination;
+            NotificationHandler.Instance.ShowNotification(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh2IncomingDestination);
 
         }
 

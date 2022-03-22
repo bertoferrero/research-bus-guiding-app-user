@@ -10,7 +10,7 @@
             <Label Text="{Binding StopName}" />
             <Label Text="{x:Static resources:RiderTexts.SummaryLine}" />
             <Label Text="{Binding RouteName}" />
-            <Label Text="{x:Static resources:RiderTexts.SelectDestinationStop}"/>
+            <Label Text="{x:Static resources:RiderTexts.P4_SelectDestinationStop}"/>
 
             <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Stops}" SelectedItem="{Binding SelectedStop}">
                 <ListView.ItemTemplate>
