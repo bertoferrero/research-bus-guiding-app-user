@@ -148,7 +148,7 @@
     <value>Please, enter the origin stop code or tap the 'Geolocalise' button.</value>
   </data>
   <data name="P2-Title" xml:space="preserve">
-    <value>Origin stop</value>
+    <value>Origin stop selection</value>
   </data>
   <data name="P3-SelectRoute" xml:space="preserve">
     <value>Please, select the line you want to get on.</value>
@@ -160,7 +160,7 @@
     <value>Please, select the destination stop where you want to get off.</value>
   </data>
   <data name="P4-Title" xml:space="preserve">
-    <value>Destination stop</value>
+    <value>Destination stop selection</value>
   </data>
   <data name="P4-TravelConfirmPrompt" xml:space="preserve">
     <value>Do you want to travel from {0} to {1} by using the line {2}?</value>

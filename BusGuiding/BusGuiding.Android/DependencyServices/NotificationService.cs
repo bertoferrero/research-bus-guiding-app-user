@@ -102,8 +102,10 @@ namespace BusGuiding.Droid.DependencyService
             notificationManager.Notify(messageId++, notification);
             return messageId;
 
-        //Cerrar notificación
-        //https://stackoverflow.com/questions/6533360/close-android-notification
+            //Cerrar notificación
+            //https://stackoverflow.com/questions/6533360/close-android-notification
+            //Sonidos y vibraciones, pero tiene que ir en el canal. Crear en la interfaz dos métodos (si la interfaz lo permite) que sea ShowRiderNotification y ShowDriverNotification, que inicialicen el canal si no lo está y envien la notificación
+            //https://stackoverflow.com/questions/18253482/vibrate-and-sound-defaults-on-notification
         }
         #endregion
     }

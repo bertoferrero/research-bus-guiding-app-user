@@ -151,7 +151,7 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Origin stop.
+        ///   Busca una cadena traducida similar a Origin stop selection.
         /// </summary>
         internal static string P2_Title {
             get {
@@ -187,7 +187,7 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Destination stop.
+        ///   Busca una cadena traducida similar a Destination stop selection.
         /// </summary>
         internal static string P4_Title {
             get {
