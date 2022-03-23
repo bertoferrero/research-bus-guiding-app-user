@@ -38,3 +38,4 @@ using Android.App;
 [assembly: UsesPermission(Manifest.Permission.SystemAlertWindow)]
 [assembly: UsesPermission(Manifest.Permission.ForegroundService)]
 [assembly: UsesPermission(Manifest.Permission.DisableKeyguard)]
+[assembly: UsesPermission(Manifest.Permission.Vibrate)]

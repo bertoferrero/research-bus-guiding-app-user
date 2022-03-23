@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Gms.Extensions;
+using Android.Media;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -25,13 +26,20 @@ namespace BusGuiding.Droid.DependencyService
         public event EventHandler<IDictionary<string, string>> pushReceived;
 
 
-        protected static string highPriorityChannelId { get => "busguiding_high_notifications"; }
-        protected static string lowPriorityChannelId { get => "busguiding_notifications"; }
+        protected static string driverPriorityChannelId { get => "busguiding_driver_notifications"; }
+        protected static string riderPriorityChannelId { get => "busguiding_rider_notifications"; }
         protected static string channelName { get => "Busguiding"; }
         protected static List<string> channelsInitialised = new List<string>();
         int messageId = 0;
         int pendingIntentId = 0;
         NotificationManager notificationManager;
+
+        long[] vibrationPattern = /*{ 100, 200, 300, 600, 500, 400, 300, 200, 400 };*/new long[] { 100, 250, 100, 200 };
+
+       /* Android.Net.Uri notificationUri = Android.Net.Uri.Parse
+($"{ContentResolver.SchemeAndroidResource}://{Platform.CurrentActivity.PackageName}/raw/elevator_ding.mp3");*/
+            
+            //Android.Net.Uri.Parse($"{ContentResolver.SchemeAndroidResource}://com.bertoferrero.busguiding/raw/elevator_ding.mp3");
 
         public void start()
         {
@@ -66,11 +74,27 @@ namespace BusGuiding.Droid.DependencyService
                 channelsInitialised.Add(channelId);
                 if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
                 {
+                    notificationManager.DeleteNotificationChannel(channelId);
                     //https://stackoverflow.com/questions/47531742/startforeground-fail-after-upgrade-to-android-8-1
                     var chan = new NotificationChannel(channelId, channelName, NotificationImportance.High);
                     chan.LockscreenVisibility = NotificationVisibility.Private;
                     chan.EnableVibration(true);
                     chan.EnableLights(true);
+        
+                    //Specific settings
+                    if (channelId.Equals(driverPriorityChannelId))
+                    {
+                        /*var alarmAttributes = new AudioAttributes.Builder()
+                                      //.SetContentType(AudioContentType.Sonification)
+                                      .SetUsage(AudioUsageKind.Notification)
+                                      .Build();
+                        chan.SetSound(notificationUri, alarmAttributes);
+                        chan.SetVibrationPattern(new long[]{ 100, 200, 300, 600, 500, 400, 300, 200, 400 });*/
+                    }
+                    else
+                    {
+                        chan.SetVibrationPattern(vibrationPattern);
+                    }
                     //https://docs.microsoft.com/es-es/xamarin/android/app-fundamentals/notifications/local-notifications-walkthrough
                     notificationManager.CreateNotificationChannel(chan);
                 }
@@ -78,9 +102,9 @@ namespace BusGuiding.Droid.DependencyService
             return channelId;
         }
 
-        public int ShowNotification(string title, string message, bool highImportance = false)
+        public int ShowNotification(string title, string message, bool forDriver = false)
         {
-            string channelId = highImportance?highPriorityChannelId:lowPriorityChannelId;
+            string channelId = forDriver ? driverPriorityChannelId:riderPriorityChannelId;
             createNotificationChannel(channelId, channelName);
 
             Intent intent = new Intent(Platform.CurrentActivity, typeof(MainActivity));
@@ -96,7 +120,15 @@ namespace BusGuiding.Droid.DependencyService
                 .SetStyle(new Notification.BigTextStyle().BigText(message))
                 //.SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.xamagonBlue))
                 .SetSmallIcon(Resource.Mipmap.icon);
-                //.SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
+            //.SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
+            if (forDriver)
+            {
+
+            }
+            else
+            {
+                //builder.SetVibrate(vibrationPattern);
+            }
 
             Notification notification = builder.Build();
             notificationManager.Notify(messageId++, notification);

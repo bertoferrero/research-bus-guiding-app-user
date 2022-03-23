@@ -2,9 +2,11 @@
 using BusGuiding.Models.Api.Exceptions;
 using BusGuiding.Views.Driver;
 using BusGuiding.Views.Tools;
+using Plugin.SimpleAudioPlayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -109,6 +111,8 @@ namespace BusGuiding.ViewModels.Driver
                 //NotificationHandler.Instance.ShowNotification("STOP!", $"Stop is required for stop number {e["stop_id"]}", true);
                 //Bring the app to the front
                 DependencyService.Get<IDeviceTaskManager>().BringToForeground();
+                //Play the sound
+                playStopSound();
                 //Show the popup
                 _ = StopAlertPopupPage.ShowStopAlertAsync(e["stop_id"]);
             }
@@ -117,6 +121,16 @@ namespace BusGuiding.ViewModels.Driver
                 //Close the notification
                 _ = StopAlertPopupPage.CloseStopAlertAsync();
             }
+        }
+
+        private void playStopSound()
+        {
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream("BusGuiding." + "elevator_ding.mp3");
+            ISimpleAudioPlayer player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load(stream);
+            player.Volume = 1;
+            player.Play();
         }
 
         

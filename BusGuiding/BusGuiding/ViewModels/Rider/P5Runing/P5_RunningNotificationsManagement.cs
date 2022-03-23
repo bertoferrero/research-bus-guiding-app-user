@@ -151,12 +151,12 @@ namespace BusGuiding.ViewModels.Driver.P5Running
         private void sendPhase1InTransitToMessages()
         {
             CurrentStatus = Resources.RiderTexts.StatusPh1InTransit;
-            NotificationHandler.Instance.ShowNotification(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh1InTransit);
+            NotificationHandler.Instance.ShowNotificationRider(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh1InTransit);
         }
         private void sendPhase1IncomingAtMessages()
         {
             CurrentStatus = Resources.RiderTexts.StatusPh1Incoming;
-            NotificationHandler.Instance.ShowNotification(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh1Incoming);
+            NotificationHandler.Instance.ShowNotificationRider(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh1Incoming);
         }
 
         private void sendPhase2RemainingStopsMessages(string nextStopName, int remainingStopsAmount)
@@ -170,14 +170,14 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             {
                 //Final stop
                 CurrentStatus = Resources.RiderTexts.StatusPh2IntransitDestination;
-                NotificationHandler.Instance.ShowNotification(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh2IntransitDestination);
+                NotificationHandler.Instance.ShowNotificationRider(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh2IntransitDestination);
             }
         }
 
         private void sendPhase2Incoming()
         {
             CurrentStatus = Resources.RiderTexts.StatusPh2IncomingDestination;
-            NotificationHandler.Instance.ShowNotification(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh2IncomingDestination);
+            NotificationHandler.Instance.ShowNotificationRider(Resources.RiderTexts.NotificationTitleRouteUpdate, Resources.RiderTexts.NotificationPh2IncomingDestination);
 
         }
 

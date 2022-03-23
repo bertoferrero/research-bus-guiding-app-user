@@ -14,7 +14,7 @@ namespace BusGuiding.DependencyServices
 
         Task<string> GetDeviceTokenAsync();
 
-        public int ShowNotification(string title, string message, bool highImportance = false);
+        public int ShowNotification(string title, string message, bool forDriver = false);
 
     }
 }

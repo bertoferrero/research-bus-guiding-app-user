@@ -46,6 +46,8 @@ namespace BusGuiding
             }
         }
 
+        #region reception
+
         private void OnNewToken(object sender, string NewToken)
         {
             try
@@ -68,9 +70,18 @@ namespace BusGuiding
 
         public async Task<string> GetTokenAsync() => await currentService.GetDeviceTokenAsync();
 
-        public int ShowNotification(string title, string message, bool highImportance = false)
+        #endregion
+
+        #region Showing
+
+        public int ShowNotificationDriver(string title, string message)
         {
-            return currentService.ShowNotification(title, message, highImportance);
+            return currentService.ShowNotification(title, message, true);
         }
+        public int ShowNotificationRider(string title, string message)
+        {
+            return currentService.ShowNotification(title, message);
+        }
+        #endregion
     }
 }

@@ -1,8 +1,11 @@
 ﻿using Acr.UserDialogs;
 using BusGuiding.Models.Api.Exceptions;
 using BusGuiding.Views.Tools;
+using Plugin.SimpleAudioPlayer;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using Xamarin.Essentials;
@@ -71,9 +74,10 @@ namespace BusGuiding.ViewModels
             ShowForm = true;
         }
 
+
         private async void OnLoginClicked(object obj)
         {
-
+            
             string cleanUsername = username.Trim();
             string cleanPassword = password.Trim();
             if (string.IsNullOrEmpty(cleanUsername) || string.IsNullOrEmpty(cleanPassword))
