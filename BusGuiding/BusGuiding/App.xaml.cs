@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace BusGuiding
 {
@@ -40,6 +43,11 @@ namespace BusGuiding
 
         protected override void OnStart()
         {
+            AppCenter.Start("android=d1afa719-057e-4f37-b170-99941274a8f0;"/* +
+                  "uwp={Your UWP App secret here};" +
+                  "ios={Your iOS App secret here};" +
+                  "macos={Your macOS App secret here};"*/,
+                  typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

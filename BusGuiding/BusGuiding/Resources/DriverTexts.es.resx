@@ -133,7 +133,7 @@
     <value>Porfavor, indique el identificador del vehículo y la línea sobre la que va a circular.</value>
   </data>
   <data name="PopUpAutomaticallyClose" xml:space="preserve">
-    <value>Este mensaje se cerrará automáticamente. Igualmente puede cerrarse de forma manual mediante el siguiente botón</value>
+    <value>Este mensaje se cerrará automáticamente.</value>
   </data>
   <data name="SendGPSOption" xml:space="preserve">
     <value>Enviar datos GPS</value>
