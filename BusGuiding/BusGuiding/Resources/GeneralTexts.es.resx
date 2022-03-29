@@ -138,8 +138,14 @@
   <data name="Login" xml:space="preserve">
     <value>Entrar</value>
   </data>
+  <data name="LoginButtonHelpText" xml:space="preserve">
+    <value>Pulsa para verificar tus datos y acceder.</value>
+  </data>
   <data name="LoginError" xml:space="preserve">
     <value>Error de identificación</value>
+  </data>
+  <data name="LoginPageTitle" xml:space="preserve">
+    <value>Identificación de usuario</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>Aceptar</value>

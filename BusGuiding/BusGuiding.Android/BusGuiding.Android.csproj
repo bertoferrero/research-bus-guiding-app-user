@@ -102,6 +102,8 @@
     <Compile Include="DependencyServices\NotificationService.cs" />
     <Compile Include="FirebaseService.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="DependencyServices\Shell\MyShellRenderer.cs" />
+    <Compile Include="DependencyServices\Shell\MyShellToolbarAppearanceTracker.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GPSSenderService.cs" />

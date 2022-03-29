@@ -124,11 +124,29 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tap to check your authentication data..
+        /// </summary>
+        internal static string LoginButtonHelpText {
+            get {
+                return ResourceManager.GetString("LoginButtonHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Login error.
         /// </summary>
         internal static string LoginError {
             get {
                 return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Login.
+        /// </summary>
+        internal static string LoginPageTitle {
+            get {
+                return ResourceManager.GetString("LoginPageTitle", resourceCulture);
             }
         }
         

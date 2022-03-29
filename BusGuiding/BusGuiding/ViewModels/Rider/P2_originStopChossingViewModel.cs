@@ -1,4 +1,5 @@
-﻿using BusGuiding.Models.Api.Exceptions;
+﻿using Acr.UserDialogs;
+using BusGuiding.Models.Api.Exceptions;
 using BusGuiding.Views.Tools;
 using System;
 using System.Collections.Generic;
@@ -60,18 +61,18 @@ namespace BusGuiding.ViewModels.Driver
             }
             catch (ConnectionException ex)
             {
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
+                UserDialogs.Instance.Alert(Resources.GeneralTexts.ConnectionError);
                 return;
             }
             catch (StatusCodeException ex)
             {
                 if(ex.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.RiderTexts.StopNotFoundError, Resources.GeneralTexts.Close);
+                    UserDialogs.Instance.Alert(Resources.RiderTexts.StopNotFoundError);
                 }
                 else
                 {
-                    await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
+                    UserDialogs.Instance.Alert(Resources.GeneralTexts.ConnectionError);
                 }
             }
             finally
@@ -88,7 +89,7 @@ namespace BusGuiding.ViewModels.Driver
             var location = await Geolocation.GetLocationAsync(request);
             if (location == null)
             {
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.RiderTexts.GeolocationError, Resources.GeneralTexts.Close);
+                UserDialogs.Instance.Alert(Resources.RiderTexts.GeolocationError);
                 return;
 
             }
@@ -103,7 +104,7 @@ namespace BusGuiding.ViewModels.Driver
             }
             catch (Exception ex)
             {
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
+                UserDialogs.Instance.Alert(Resources.GeneralTexts.ConnectionError);
                 return;
             }
             finally

@@ -126,6 +126,9 @@
   <data name="ErrorMessagePhase" xml:space="preserve">
     <value>Sorry, a technical error happend during phase {0}</value>
   </data>
+  <data name="GeocaliseButtonHelpText" xml:space="preserve">
+    <value>Tab to find your nearest bus stop using your device GPD data.</value>
+  </data>
   <data name="GeolocationError" xml:space="preserve">
     <value>Geolocation data cannot be got. Please try again.</value>
   </data>
@@ -203,6 +206,12 @@
   </data>
   <data name="StatusWaitingIncomingBus" xml:space="preserve">
     <value>Waiting for an incoming bus</value>
+  </data>
+  <data name="StopCode" xml:space="preserve">
+    <value>Stop code.</value>
+  </data>
+  <data name="StopCodeHelpText" xml:space="preserve">
+    <value>Enter here the origin stop's code and tab the "OK" button.</value>
   </data>
   <data name="StopNotFoundError" xml:space="preserve">
     <value>Stop not found</value>

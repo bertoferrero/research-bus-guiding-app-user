@@ -181,7 +181,7 @@ namespace BusGuiding.ViewModels.Driver
             }
             catch (Exception ex)
             {
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.RiderTexts.RoutesGettingError, Resources.GeneralTexts.Close);
+                await UserDialogs.Instance.AlertAsync(Resources.RiderTexts.RoutesGettingError);
                 await Shell.Current.GoToAsync("..");
                 return;
             }

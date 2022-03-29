@@ -1,18 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Title="{Binding Title}"
+             Title="{x:Static resources:GeneralTexts.LoginPageTitle}"
              xmlns:resources="clr-namespace:BusGuiding.Resources"
-             x:Class="BusGuiding.Views.LoginPage">
+             x:Class="BusGuiding.Views.LoginPage"
+             AutomationProperties.IsInAccessibleTree="true"
+             AutomationProperties.Name="{x:Static resources:GeneralTexts.LoginPageTitle}"
+             >
     <ContentPage.Content>
         <StackLayout Margin="10"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="FillAndExpand" IsVisible="{Binding ShowForm}">
             <!--<Label Text="User"/>-->
-            <Entry Placeholder="{x:Static resources:GeneralTexts.User}" Text="{Binding Username}"/>
+            <Entry Placeholder="{x:Static resources:GeneralTexts.User}" Text="{Binding Username}" AutomationProperties.Name="{x:Static resources:GeneralTexts.User}"/>
             <!--<Label Text="Password" />-->
-            <Entry Placeholder="{x:Static resources:GeneralTexts.Password}" IsPassword="True" Text="{Binding Password}"/>
-            <Button Text="{x:Static resources:GeneralTexts.Login}" Command="{Binding LoginCommand}"/>
+            <Entry Placeholder="{x:Static resources:GeneralTexts.Password}" IsPassword="True" Text="{Binding Password}" AutomationProperties.Name="{x:Static resources:GeneralTexts.Password}"/>
+            <Button Text="{x:Static resources:GeneralTexts.Login}" Command="{Binding LoginCommand}" AutomationProperties.Name="{x:Static resources:GeneralTexts.Login}" AutomationProperties.HelpText="{x:Static resources:GeneralTexts.LoginButtonHelpText}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

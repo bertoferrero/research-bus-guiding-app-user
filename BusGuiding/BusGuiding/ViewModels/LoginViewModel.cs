@@ -103,13 +103,15 @@ namespace BusGuiding.ViewModels
             {
                 //TODO Connection error
                 await LoadingPopupPage.HideLoadingAsync();
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
+                UserDialogs.Instance.Alert(Resources.GeneralTexts.ConnectionError);
+                //await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.ConnectionError, Resources.GeneralTexts.Close);
             }
             catch(StatusCodeException ex)
             {
                 //Login error
                 await LoadingPopupPage.HideLoadingAsync();
-                await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.LoginError, Resources.GeneralTexts.Close);
+                UserDialogs.Instance.Alert(Resources.GeneralTexts.LoginError);
+                //await this._messageService.DisplayAlert(Resources.GeneralTexts.Error, Resources.GeneralTexts.LoginError, Resources.GeneralTexts.Close);
             }
             //IsBusy = false;
         }

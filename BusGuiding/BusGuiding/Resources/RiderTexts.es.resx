@@ -126,6 +126,9 @@
   <data name="ErrorMessagePhase" xml:space="preserve">
     <value>Lo sentimos, ha ocurrido un error técnico durante la fase {0}</value>
   </data>
+  <data name="GeocaliseButtonHelpText" xml:space="preserve">
+    <value>Pulsa para buscar la parada mas cercana en base a la posición GPS de tu móvil.</value>
+  </data>
   <data name="GeolocationError" xml:space="preserve">
     <value>No se ha podido geolocalizar. Por favor, prueba otra vez.</value>
   </data>
@@ -203,6 +206,12 @@
   </data>
   <data name="StatusWaitingIncomingBus" xml:space="preserve">
     <value>Esperando autobús.</value>
+  </data>
+  <data name="StopCode" xml:space="preserve">
+    <value>Código de la parada.</value>
+  </data>
+  <data name="StopCodeHelpText" xml:space="preserve">
+    <value>Indica aquí el código de la parada de origen y pulsa "Aceptar".</value>
   </data>
   <data name="StopNotFoundError" xml:space="preserve">
     <value>Parada no encontrada</value>

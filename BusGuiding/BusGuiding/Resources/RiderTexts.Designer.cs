@@ -88,6 +88,15 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tab to find your nearest bus stop using your device GPD data..
+        /// </summary>
+        internal static string GeocaliseButtonHelpText {
+            get {
+                return ResourceManager.GetString("GeocaliseButtonHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Geolocation data cannot be got. Please try again..
         /// </summary>
         internal static string GeolocationError {
@@ -318,6 +327,24 @@ namespace BusGuiding.Resources {
         internal static string StatusWaitingIncomingBus {
             get {
                 return ResourceManager.GetString("StatusWaitingIncomingBus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Stop code..
+        /// </summary>
+        internal static string StopCode {
+            get {
+                return ResourceManager.GetString("StopCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter here the origin stop&apos;s code and tab the &quot;OK&quot; button..
+        /// </summary>
+        internal static string StopCodeHelpText {
+            get {
+                return ResourceManager.GetString("StopCodeHelpText", resourceCulture);
             }
         }
         

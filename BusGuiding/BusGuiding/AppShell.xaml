@@ -10,7 +10,7 @@
     <Tab>
         <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" Route="login" />
     </Tab>
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="false">
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="false" >
         <ShellContent x:Name="DevDelaysMenu" Title="Tests 1 Delay tests" ContentTemplate="{DataTemplate viewsdev:DelayTestsPage}" FlyoutItemIsVisible="False" Route="devdelaytests"/>
         <ShellContent x:Name="DevFunctionalDemoMenu" Title="Tests 2 Functional demos" ContentTemplate="{DataTemplate viewsdev:FunctionalDemoTestsPage}" FlyoutItemIsVisible="False" Route="devfunctionaltests"/>
         <ShellContent ContentTemplate="{DataTemplate viewsdriver:DriverPage}" Route="driver"  FlyoutItemIsVisible="False"/>
