@@ -156,6 +156,9 @@
   <data name="P3-SelectRoute" xml:space="preserve">
     <value>Por favor, selecciona la línea que quieres coger.</value>
   </data>
+  <data name="P3-SelectRouteHeader" xml:space="preserve">
+    <value>Líneas disponibles en esta parada:</value>
+  </data>
   <data name="P3-Title" xml:space="preserve">
     <value>Selección de línea</value>
   </data>

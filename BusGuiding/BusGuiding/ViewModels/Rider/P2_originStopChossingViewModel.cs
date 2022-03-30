@@ -105,11 +105,8 @@ namespace BusGuiding.ViewModels.Driver
             catch (Exception ex)
             {
                 UserDialogs.Instance.Alert(Resources.GeneralTexts.ConnectionError);
-                return;
-            }
-            finally
-            {
                 await LoadingPopupPage.HideLoadingAsync();
+                return;
             }
         }
 

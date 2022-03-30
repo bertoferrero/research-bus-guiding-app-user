@@ -156,6 +156,9 @@
   <data name="P3-SelectRoute" xml:space="preserve">
     <value>Please, select the line you want to get on.</value>
   </data>
+  <data name="P3-SelectRouteHeader" xml:space="preserve">
+    <value>Available routes for this stop:</value>
+  </data>
   <data name="P3-Title" xml:space="preserve">
     <value>Line selection</value>
   </data>

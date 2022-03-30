@@ -178,6 +178,15 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Available routes for this stop:.
+        /// </summary>
+        internal static string P3_SelectRouteHeader {
+            get {
+                return ResourceManager.GetString("P3-SelectRouteHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Line selection.
         /// </summary>
         internal static string P3_Title {

@@ -87,7 +87,7 @@
     <PackageReference Include="Xamarin.Firebase.Messaging">
       <Version>122.0.0.3</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
     <PackageReference Include="Xamarin.Google.Dagger">
       <Version>2.39.1</Version>
@@ -97,6 +97,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderer\FixedAccesibilityListViewRenderer.cs" />
     <Compile Include="DependencyServices\LocationSenderService.cs" />
     <Compile Include="DependencyServices\DeviceTaskManager.cs" />
     <Compile Include="DependencyServices\NotificationService.cs" />
