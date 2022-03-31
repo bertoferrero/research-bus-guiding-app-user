@@ -4,8 +4,6 @@
              x:Class="BusGuiding.Views.Rider.P2_OriginStopChossing"
              xmlns:resources="clr-namespace:BusGuiding.Resources"
              Title="{x:Static resources:RiderTexts.P2_Title}"
-             AutomationProperties.IsInAccessibleTree="true"
-             AutomationProperties.Name="{x:Static resources:RiderTexts.P2_Title}"
              >
     <ContentPage.Content>
         <StackLayout Margin="10"

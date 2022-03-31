@@ -7,6 +7,7 @@
              x:Class="BusGuiding.Views.Driver.StopAlertPopupPage" 
              xmlns:resources="clr-namespace:BusGuiding.Resources"
         Padding="20, 20, 20, 20" BackgroundColor="IndianRed"
+    IsAnimationEnabled="False"
     CloseWhenBackgroundIsClicked="False">
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation 
@@ -31,6 +32,6 @@
         <Label
             Text="" x:Name="StopIdLabel" TextColor="White" FontSize="150" HorizontalTextAlignment="Center"/>
         <Label Text="{x:Static resources:DriverTexts.PopUpAutomaticallyClose}" TextColor="White" HorizontalTextAlignment="Center"/>
-        <Button Text="{x:Static resources:GeneralTexts.Close}" x:Name="CloseButton" Clicked="CloseButton_Clicked"/>
+        <Button Text="{x:Static resources:GeneralTexts.Close}" x:Name="CloseButton" Clicked="CloseButton_Clicked" BorderColor="#982c33" BackgroundColor="#cd5c5c" BorderWidth="1"/>
     </StackLayout>
 </pages:PopupPage>

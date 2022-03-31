@@ -8,18 +8,24 @@
         <StackLayout Margin="10">
             <Frame BorderColor="Gray" CornerRadius="10">
                 <StackLayout>
-                    <Label Text="{x:Static resources:RiderTexts.SummaryOriginStop}" />
-                    <Label Text="{Binding StopName}" />
-                    <Label Text="{x:Static resources:RiderTexts.SummaryLine}" />
-                    <Label Text="{Binding RouteName}" />
+                    <Label Text="{x:Static resources:RiderTexts.SummaryOriginStop}"  FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding StopName}" Padding="10,0,0,10"/>
+                    <Label Text="{x:Static resources:RiderTexts.SummaryLine}"  FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding RouteName}" Padding="10,0,0,0"/>
                 </StackLayout>
             </Frame>
             <Frame BorderColor="Gray" CornerRadius="10">
                 <StackLayout>
-                    <customviews:FixedAccesibilityListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Stops}" SelectedItem="{Binding SelectedStop}" Header="{x:Static resources:RiderTexts.P4_SelectDestinationStop}">
+                    <customviews:FixedAccesibilityListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Stops}" SelectedItem="{Binding SelectedStop, Mode=TwoWay}" HasUnevenRows="True">
+                        <customviews:FixedAccesibilityListView.Header>
+                            <Label Text="{x:Static resources:RiderTexts.P4_SelectDestinationStop}" FontSize="Medium" FontAttributes="Bold" Margin="0,10,0,10" VerticalTextAlignment="Center"/>
+                        </customviews:FixedAccesibilityListView.Header>
                         <customviews:FixedAccesibilityListView.ItemTemplate>
                             <DataTemplate>
-                                <TextCell Text="{Binding Name}" />
+                                <ViewCell>
+                                    <Label Text="{Binding Name}"  Margin="10,15,0,15" FontSize="Medium" TextColor="{StaticResource AppPrimaryColor}" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </ViewCell>
+                                <!--<TextCell Text="{Binding Name}" Height="50"/>-->
                             </DataTemplate>
                         </customviews:FixedAccesibilityListView.ItemTemplate>
                     </customviews:FixedAccesibilityListView>

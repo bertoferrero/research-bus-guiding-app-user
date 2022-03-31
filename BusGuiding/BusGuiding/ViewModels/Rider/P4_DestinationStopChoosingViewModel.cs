@@ -115,7 +115,11 @@ namespace BusGuiding.ViewModels.Driver
             set
             {
                 SetProperty(ref selectedStop, value);
-                onStopSelected();
+                if (value != null)
+                {
+                    onStopSelected();
+                }
+
             }
         }
 
@@ -217,6 +221,7 @@ namespace BusGuiding.ViewModels.Driver
                     jso.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
                     await Shell.Current.GoToAsync($"p5?origin_stop_code={stopCode}&origin_stop_name={stopName}&origin_stop_schema_id={stopSchemaId}&route_schema_id={RouteSchemaId}&route_name={RouteName}&route_color={RouteColor}&destination_stop_code={SelectedStop.Code}&destination_stop_name={SelectedStop.Name}&destination_stop_schema_id={SelectedStop.SchemaId}&subroute={JsonSerializer.Serialize(subRoute, jso)}");
                 }
+                SelectedStop = null;
             }
         }
 
