@@ -61,7 +61,7 @@ namespace BusGuiding.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a You arrived at destination! Thanks for using BusGuiding App..
+        ///   Busca una cadena traducida similar a You arrived at destination! Thanks for using Bus Assistant App..
         /// </summary>
         internal static string ArrivedAtDestinationAlert {
             get {

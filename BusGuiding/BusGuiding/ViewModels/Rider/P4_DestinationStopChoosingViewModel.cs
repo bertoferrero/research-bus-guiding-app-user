@@ -195,7 +195,7 @@ namespace BusGuiding.ViewModels.Driver
         {
             if (SelectedStop != null)
             {
-                bool answer = await UserDialogs.Instance.ConfirmAsync(string.Format(Resources.RiderTexts.P4_TravelConfirmPrompt, StopName, SelectedStop.Name, RouteName));
+                bool answer = await UserDialogs.Instance.ConfirmAsync(string.Format(Resources.RiderTexts.P4_TravelConfirmPrompt, StopName, SelectedStop.Name, RouteName), null, Resources.GeneralTexts.OK, Resources.GeneralTexts.Cancel);
                 if (answer)
                 {
                     //Prepare subroute

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ArrivedAtDestinationAlert" xml:space="preserve">
-    <value>You arrived at destination! Thanks for using BusGuiding App.</value>
+    <value>You arrived at destination! Thanks for using Bus Assistant App.</value>
   </data>
   <data name="CancelGuidingConfirmation" xml:space="preserve">
     <value>Do you want to cancel this route?</value>

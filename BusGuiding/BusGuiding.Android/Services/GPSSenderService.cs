@@ -118,7 +118,7 @@ namespace BusGuiding.Droid.Services
         {
             createNotificationChannel("my_notification_channel", "BusGuiding");
             var notification = new Notification.Builder(this, "my_notification_channel") //TODO configuracion
-                .SetContentTitle("BusGuiding")
+                .SetContentTitle("Bus Assistant")
                 .SetContentText("Sending GPS location")
                 //.SetSmallIcon(Resource.Drawable.ic_stat_name)
                 .SetContentIntent(BuildIntentToShowMainActivity())

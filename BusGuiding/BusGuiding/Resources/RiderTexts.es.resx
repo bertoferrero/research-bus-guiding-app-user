@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ArrivedAtDestinationAlert" xml:space="preserve">
-    <value>¡Has llegado a destino! Gracias por usar BusGuiding.</value>
+    <value>¡Has llegado a destino! Gracias por usar Bus Assistant.</value>
   </data>
   <data name="CancelGuidingConfirmation" xml:space="preserve">
     <value>¿Quieres cancelar esta ruta?</value>
@@ -136,7 +136,7 @@
     <value>Tu autobús está llegando a la parada de origen, prepárate para subir.</value>
   </data>
   <data name="NotificationPh1InTransit" xml:space="preserve">
-    <value>Autobús localizado, se encuentra dirigiendose a la parada de origen.</value>
+    <value>Autobús localizado, se encuentra dirigiéndose a la parada de origen.</value>
   </data>
   <data name="NotificationPh2IncomingDestination" xml:space="preserve">
     <value>Tu autobús está llegando a la parada final, prepárate para bajar.</value>
@@ -148,10 +148,10 @@
     <value>Actualización de ruta</value>
   </data>
   <data name="P2-EnterOriginStopLabel" xml:space="preserve">
-    <value>Por favor, introduce el código de la parada origen o pulsa en geolocalizar.</value>
+    <value>Por favor, introduce el código de la parada de origen o pulsa en geolocalizar.</value>
   </data>
   <data name="P2-Title" xml:space="preserve">
-    <value>Parada de origen</value>
+    <value>Selección de parada de origen</value>
   </data>
   <data name="P3-SelectRoute" xml:space="preserve">
     <value>Por favor, selecciona la línea que quieres coger.</value>
@@ -166,7 +166,7 @@
     <value>Por favor, selecciona la parada donde deseas bajarte.</value>
   </data>
   <data name="P4-Title" xml:space="preserve">
-    <value>Parada final</value>
+    <value>Selección de parada final</value>
   </data>
   <data name="P4-TravelConfirmPrompt" xml:space="preserve">
     <value>¿Confirmas que quieres viajar de {0} a {1} usando la línea {2}?</value>
@@ -220,7 +220,7 @@
     <value>Parada no encontrada</value>
   </data>
   <data name="SummaryLine" xml:space="preserve">
-    <value>Linea:</value>
+    <value>Línea:</value>
   </data>
   <data name="SummaryOriginStop" xml:space="preserve">
     <value>Parada de origen:</value>

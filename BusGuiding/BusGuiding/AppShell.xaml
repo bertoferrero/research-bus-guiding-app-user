@@ -7,6 +7,22 @@
        xmlns:viewsrider="clr-namespace:BusGuiding.Views.Rider"
        x:Name="shell"
        x:Class="BusGuiding.AppShell">
+    <Shell.Resources>
+        <!-- Style Shell elements -->
+        <Style x:Key="BaseStyle"
+               TargetType="Element">
+            <Setter Property="Shell.BackgroundColor"
+                    Value="{StaticResource AppPrimaryColor}" />
+            <Setter Property="Shell.ForegroundColor"
+                    Value="{StaticResource SecondaryColor}" />
+            <Setter Property="Shell.TitleColor"
+                    Value="{StaticResource SecondaryColor}" />
+            <Setter Property="Shell.TabBarUnselectedColor"
+                    Value="#95FFFFFF"/>
+        </Style>
+        <Style TargetType="TabBar"
+               BasedOn="{StaticResource BaseStyle}" />
+    </Shell.Resources>
     <Tab>
         <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" Route="login" />
     </Tab>

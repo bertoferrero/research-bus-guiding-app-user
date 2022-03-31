@@ -24,6 +24,8 @@ namespace BusGuiding.Droid.DependencyService.Shell
 
         protected override void SetColors(AndroidX.AppCompat.Widget.Toolbar toolbar, IShellToolbarTracker toolbarTracker, Color foreground, Color background, Color title)
         {
+            background = Color.FromHex("#0d47a1");
+
             base.SetColors(toolbar, toolbarTracker, foreground, background, title);
             var role = Preferences.Get(Constants.PreferenceKeys.UserRole, "");
             if (role.Equals(Constants.UserRoles.Rider))
