@@ -89,10 +89,10 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 List<string> topics = new List<string>();
                 topics.Add($"line.{RouteSchemaId}.in_transit_to.{OriginStopSchemaId}");
                 topics.Add($"line.{RouteSchemaId}.incoming_at.{OriginStopSchemaId}");
-                _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
+                await Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
 
                 //Request for the stop at the origin bus stop
-                _ = Models.Api.StopRequest.RequestRouteStopAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), RouteSchemaId, OriginStopSchemaId);
+                await Models.Api.StopRequest.RequestRouteStopAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), RouteSchemaId, OriginStopSchemaId);
 
                 //Set status message
                 CurrentStatus = Resources.RiderTexts.StatusWaitingIncomingBus;
@@ -129,7 +129,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 //Request in_transit_to to any stop
                 List<string> topics = new List<string>();
                 topics.Add($"vehicle.{vehicleId}.in_transit_to.0");
-                _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
+                await Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
 
 
             }
@@ -165,7 +165,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 topics.Add($"vehicle.{vehicleId}.in_transit_to.0");
                 topics.Add($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
                 topics.Add($"vehicle.{vehicleId}.stopped_at.{DestinationStopSchemaId}");
-                _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
+                await Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
 
 
             }
@@ -193,7 +193,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 //Request in_transit_to to any stop
                 List<string> topics = new List<string>();
                 topics.Add($"vehicle.{vehicleId}.in_transit_to.0");
-                _ = Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
+                await Models.Api.NotificationTopics.SubscribeNotificationTokenListAsync(Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""), topics);
 
 
             }

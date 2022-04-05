@@ -72,8 +72,10 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             }
             else if (e["status"].ToUpper().Equals("INCOMING_AT"))
             {
-                easyUnsuscribeNotificationToken($"line.{RouteSchemaId}.incoming_at.{OriginStopSchemaId}");
-                easyUnsuscribeNotificationToken($"line.{RouteSchemaId}.in_transit_to.{OriginStopSchemaId}");
+                easyUnsuscribeNotificationTokenList(new List<string>() {
+                    $"line.{RouteSchemaId}.incoming_at.{OriginStopSchemaId}",
+                    $"line.{RouteSchemaId}.in_transit_to.{OriginStopSchemaId}" }
+                );
                 sendPhase1IncomingAtMessages();
                 initPhase12(e["vehicle_id"]);
             }
@@ -83,8 +85,10 @@ namespace BusGuiding.ViewModels.Driver.P5Running
         {
             if (e["status"].ToUpper().Equals("INCOMING_AT"))
             {
-                easyUnsuscribeNotificationToken($"line.{RouteSchemaId}.incoming_at.{OriginStopSchemaId}");
-                easyUnsuscribeNotificationToken($"line.{RouteSchemaId}.in_transit_to.{OriginStopSchemaId}");
+                easyUnsuscribeNotificationTokenList(new List<string>() {
+                    $"line.{RouteSchemaId}.incoming_at.{OriginStopSchemaId}",
+                    $"line.{RouteSchemaId}.in_transit_to.{OriginStopSchemaId}" }
+                );
                 sendPhase1IncomingAtMessages();           
             }
             else if (e["status"].ToUpper().Equals("IN_TRANSIT_TO"))
@@ -115,15 +119,17 @@ namespace BusGuiding.ViewModels.Driver.P5Running
                 sendPhase2RemainingStopsMessages(stopName, remainingStops);
                 if(remainingStops == 0)
                 {
-                    easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.in_transit_to.0");
+                    //easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.in_transit_to.0");
                     //init phase22
                     initPhase22();
                 }
             }
             else if (e["status"].ToUpper().Equals("INCOMING_AT") || e["status"].ToUpper().Equals("STOPPED_AT"))
             {
-                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
-                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.stopped_at.{DestinationStopSchemaId}");
+                easyUnsuscribeNotificationTokenList(new List<string>() {
+                    $"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}",
+                    $"vehicle.{vehicleId}.stopped_at.{DestinationStopSchemaId}" }
+                );
                 sendPhase2Incoming();
                 //init phase22
                 initPhase22();
@@ -133,7 +139,7 @@ namespace BusGuiding.ViewModels.Driver.P5Running
         {
             if (e["status"].ToUpper().Equals("IN_TRANSIT_TO")) { 
 
-                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.in_transit_to.0");
+                easyUnsuscribeNotificationToken("*");
                 //show finish popup
                 UserDialogs.Instance.Alert(Resources.RiderTexts.ArrivedAtDestinationAlert);
                 //Move to root p2 page
@@ -141,8 +147,10 @@ namespace BusGuiding.ViewModels.Driver.P5Running
             }
             else if (e["status"].ToUpper().Equals("INCOMING_AT") || e["status"].ToUpper().Equals("STOPPED_AT"))
             {
-                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}");
-                easyUnsuscribeNotificationToken($"vehicle.{vehicleId}.stopped_at.{DestinationStopSchemaId}");
+                easyUnsuscribeNotificationTokenList(new List<string>() { 
+                    $"vehicle.{vehicleId}.incoming_at.{DestinationStopSchemaId}",
+                    $"vehicle.{vehicleId}.stopped_at.{DestinationStopSchemaId}" }
+                );
                 sendPhase2Incoming();
             }
         }
@@ -182,11 +190,20 @@ namespace BusGuiding.ViewModels.Driver.P5Running
         }
 
         //Helpers
-        private void easyUnsuscribeNotificationToken(string token)
+        private async void easyUnsuscribeNotificationToken(string token)
         {
-            _ = Models.Api.NotificationTopics.UnsubscribeNotificationTokenListAsync(
+            await Models.Api.NotificationTopics.UnsubscribeNotificationTokenListAsync(
                     Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""),
                     new List<string>() { token }
+                    );
+        }
+
+
+        private async void easyUnsuscribeNotificationTokenList(List<string> tokens)
+        {
+            await Models.Api.NotificationTopics.UnsubscribeNotificationTokenListAsync(
+                    Preferences.Get(Constants.PreferenceKeys.UserApiToken, ""),
+                    tokens
                     );
         }
 
