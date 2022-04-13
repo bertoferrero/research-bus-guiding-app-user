@@ -7,7 +7,7 @@
              x:Class="BusGuiding.Views.Driver.StopAlertPopupPage" 
              xmlns:resources="clr-namespace:BusGuiding.Resources"
         Padding="20, 20, 20, 20" BackgroundColor="IndianRed"
-    IsAnimationEnabled="False"
+    IsAnimationEnabled="True"
     CloseWhenBackgroundIsClicked="False">
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation 
